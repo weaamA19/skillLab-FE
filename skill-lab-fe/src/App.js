@@ -8,6 +8,7 @@ export default function App() {
     <div>
       <CoursesList></CoursesList>
       <TransactionsList></TransactionsList>
+      
     </div>
   )
 }
