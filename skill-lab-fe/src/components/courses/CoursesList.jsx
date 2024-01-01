@@ -15,90 +15,90 @@ export default function CoursesList(props) {
 
   useEffect(() => {
     //call api
-    // loadCoursesList();
+    loadCoursesList();
   }, []);
 
   const loadCoursesList = () => {
-    // Axios.get("")
-    // .then((response) => {
-    //   console.log(response);
-    //   setCourses(response.data.courses);
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    Axios.get("courses/index")
+    .then((response) => {
+      console.log(response);
+      setCourses(response.data.courses);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   const addCourses = (courses) => {
-    // Axios.post("", courses)
-    //.then(res =>{
-    //console.log('Course has been Added') })
-    //loadCoursesList()
-    
-    //.catch(err => {
+    Axios.post("courses/add", courses)
+    .then(res =>{
+    console.log('Course has been Added') 
+ loadCoursesList()
+  })
+   
+    .catch(err => {
 
-   //console.log('Error cannot Add')
-  //console,log(err) })
+   console.log('Error cannot Add')
+  console.log(err) })
 
   }
 
   const editTheView = (id) => {
-  //  Axios.get("")
-  //  .then({res} => {
-
-  //console.log(res.data.courses) 
-  //console.log('Done') 
-/// let courses = res.data.courses   
-//setIsEdit(true)
-//setCurrentCourses(courses) })
-
-  //  .catch(err => {
-  //   console.log('error')
-  //   console.log(err)
-  //  })
-
+   Axios.get(`courses/edit?id=${id}`)
+   .then((res) => {
+  console.log(res.data.courses) 
+  console.log('Loaded the Information') 
+ let courses = res.data.courses   
+setIsEdit(true)
+setCurrentCourses(courses) 
+})
+   .catch(err => {
+    console.log('error')
+    console.log(err)
+   })
 
   }
 
 
-  const updateTheview = () => {
-//Axios.put("")
-//.then(res => {
-//   console.log('Course has been Updated')
-//   console.log(res)
-//   loadCoursesList()
- //  setIsEdit(false)
-// })
+  const updateTheview = (courses) => {
+Axios.put("courses/update", courses )
 
-//.catch(err => {
-//   console.log('Cannot Update')
-//   console.log(err)
-// })
+.then(res => {
+  console.log('Course has been Updated')
+  console.log(res)
+  loadCoursesList()
+  setIsEdit(false)
+})
+
+.catch(err => {
+  console.log('Cannot Update')
+  console.log(err)
+})
   }
 
 
-  const deleteCourse = () => {
-// Axios.delete("")
-// .then(res => {
-//   console.log('Course has been Deleted')
-//   console.log(res)
-//   loadCoursesList()
-// })
+  const deleteCourse = (id) => {
+Axios.delete(`courses/delete?id=${id}`)
+.then(res => {
+  console.log('Course has been Deleted')
+  console.log(res)
+  loadCoursesList()
+})
 
-// .catch(err => {
-//   console.log('cannot delete')
-//   console.log(err)
-// })
+.catch(err => {
+  console.log('cannot delete')
+  console.log(err)
+})
   }
 
-// const allTheCourses = courses.map((courses , index) => (
+const allTheCourses = courses.map((courses , index) => (
 
-//   <tr key={index}>  
+  <tr key={index}>  
  
-//     <Courses {...courses} editView = {editTheView} deleteTheCourse={deleteCourse}/>
-//   </tr>
+    <Courses {...courses}  editView = {editTheView} deleteTheCourse={deleteCourse}/>
+  </tr>
 
-// ))
+))
 
 
 
@@ -106,7 +106,7 @@ export default function CoursesList(props) {
   return (
     <div>
        <div>
-         <table className="table table-dark">
+         <table className="table table-stripes">
           <tbody>
             <tr>
               <th>Category</th>
@@ -118,7 +118,7 @@ export default function CoursesList(props) {
              <th>Delete</th>
             </tr>   
           </tbody>
-          {/* {allTheCourses} */}
+          {allTheCourses}
         </table>
     </div>
     {(!isEdit) ? 
