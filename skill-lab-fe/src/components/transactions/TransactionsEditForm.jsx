@@ -3,22 +3,24 @@ import { useState } from 'react'
 
 export default function TransactionsCreateForm(props) {
 
-    const [editTransaction, setEditTransaction] = useState({})
+    const [editTransaction, setEditTransaction] = useState(props.transactions)
 
     const handleChange = (event) => {
     const attributeToChange = event.target.name
     const newValue = event.target.value
     
-    const transaction = {...editTransaction}
-    transaction[attributeToChange] = newValue
-    console.log(transaction)
-    setEditTransaction(transaction)
+    const updateTransaction = {...editTransaction}
+    updateTransaction[attributeToChange] = newValue
+    console.log(updateTransaction)
+    setEditTransaction(updateTransaction)
     }
     
+
     const handleSubmit = (event) => {
-        event.preventDefault()
-        props.editTransaction(editTransaction)
-    }
+      event.preventDefault()
+      props.updateTheview(editTransaction)
+      event.target.reset()
+  }
     
 
   return (
@@ -30,7 +32,7 @@ export default function TransactionsCreateForm(props) {
 
 <div>
 <label>Amount</label>
-<input type='text' name='amount' onChange={handleChange} className='form-control'></input>
+<input type='text' name='amount' value={editTransaction.amount} onChange={handleChange} className='form-control'></input>
 </div>
 
     <div>

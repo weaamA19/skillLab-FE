@@ -1,9 +1,51 @@
 import React from 'react'
 import { useState } from 'react'
-
+import { useEffect } from 'react';
+import Axios from 'axios'
+import Category from '../category/Category';
 export default function CoursesCreateForm(props) {
 
     const [newCourse, setNewCourse] = useState({})
+
+//doing this step to get data 
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+      fetchCategories();
+    }, []);
+  
+    // const fetchCategories = async () => {
+    //   try {
+    //     const response = await Axios.get("category/index")
+    //     .then((res) => {
+    //         console.log(res.data.categories)
+    //         setCategories(res.data.categories);
+    //     })
+    //     .catch(err => {
+    //         console.log("error")
+    //         console.log(err)
+    //     })
+       
+    //   } 
+    //   catch (err) {
+    //     console.error('Error fetching categories:', err);
+    //   }
+    // };
+
+    const fetchCategories = () =>{
+    
+    Axios.get('category/index')
+    .then((res) => {
+        console.log(res.data.categories)
+        setCategories(res.data.categories)
+    })
+    .catch((err) => {
+        console.log("err")
+        console.log(err)
+    })
+
+    }
+
 
     const handleChange = (event) => {
     const attributeToChange = event.target.name
@@ -17,7 +59,8 @@ export default function CoursesCreateForm(props) {
     
     const handleSubmit = (event) => {
         event.preventDefault()
-        props.addCourse(newCourse)
+        props.addCourses(newCourse)
+        event.target.reset()
     }
     
 
@@ -28,7 +71,14 @@ export default function CoursesCreateForm(props) {
 <form onSubmit={handleSubmit} >
 <div>
 <label>Category</label>
-<input type='text' name='category_id' onChange={handleChange}  className='form-control'></input>
+<select name="category_id" onChange={handleChange} className="form-control">
+  {categories.map((category) => (
+    <option key={category._id} value={category._id}>{category.name}</option>
+  ))}
+</select>
+
+
+
 </div>
 
 <div>
@@ -38,7 +88,7 @@ export default function CoursesCreateForm(props) {
 
 <div>
     <label>Duration</label>
-    <input type='number' name='duration' onChange={handleChange} className='form-control'></input>
+    <input type='string' name='duration' onChange={handleChange} className='form-control'></input>
 </div>
 
 
@@ -49,7 +99,7 @@ export default function CoursesCreateForm(props) {
 
 <div>
     <label>Price</label>
-    <input type='number' name='price' onChange={handleChange} className='form-control'></input>
+    <input type='string' name='price' onChange={handleChange} className='form-control'></input>
 </div>
 
     <div>
