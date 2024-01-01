@@ -28,6 +28,11 @@ export default function Signup(props) {
         </div>
 
         <div>
+          <label>Username</label>
+          <input type='text' name='username' onChange={handleChange} className='form-control'></input>
+        </div>
+
+        <div>
           <label>Email Address</label>
           <input type='email' name='emailAddress' onChange={handleChange} className='form-control'></input>
         </div>
