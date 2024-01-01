@@ -19,8 +19,8 @@ export default function Signin(props) {
         <form onSubmit={loginHandler}> 
 
         <div>
-          <label>Email Address</label>
-          <input type='email' name='emailAddress' onChange={handleChange} className='form-control'></input>
+          <label>Username or Email Address</label>
+          <input type='text' name='identifier' onChange={handleChange} className='form-control'></input>
         </div>
 
         <div>
