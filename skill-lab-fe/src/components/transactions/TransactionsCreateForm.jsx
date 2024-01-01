@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-export default function CoursesCreateForm(props) {
+export default function TransactionsCreateForm(props) {
 
     const [newTransaction, setNewTransaction] = useState({})
 
@@ -17,8 +17,9 @@ export default function CoursesCreateForm(props) {
     
     const handleSubmit = (event) => {
         event.preventDefault()
-        props.addTransaction(newTransaction)
+        props.addTransactions(newTransaction)
     }
+    
     
 
   return (
@@ -29,7 +30,7 @@ export default function CoursesCreateForm(props) {
 
 <div>
 <label>Amount</label>
-<input type='text' name='amount' onChange={handleChange} className='form-control'></input>
+<input type='Number' name='amount' onChange={handleChange} className='form-control'></input>
 </div>
 
     <div>

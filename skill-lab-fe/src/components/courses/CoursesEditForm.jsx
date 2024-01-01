@@ -3,21 +3,22 @@ import { useState } from 'react'
 
 export default function CoursesEditForm(props) {
 
-    const [editCourse, setEditCourse] = useState({})
+    const [editCourse, setEditCourse] = useState(props.courses)
 
     const handleChange = (event) => {
     const attributeToChange = event.target.name
     const newValue = event.target.value
     
-    const course = {...editCourse}
-    course[attributeToChange] = newValue
-    console.log(course)
-    setEditCourse(course)
+    const updatedcourse = {...editCourse}
+    updatedcourse[attributeToChange] = newValue
+    console.log(updatedcourse)
+    setEditCourse(updatedcourse)
     }
     
     const handleSubmit = (event) => {
         event.preventDefault()
-        props.addCourse(editCourse)
+        props.updateTheview(editCourse)
+        event.target.reset()
     }
     
 
@@ -32,28 +33,28 @@ export default function CoursesEditForm(props) {
 <form onSubmit={handleSubmit} >
 <div>
 <label>Category</label>
-<input type='text' name='category_id' onChange={handleChange}  className='form-control'></input>
+<input type='text' name='category_id' value={editCourse.category} onChange={handleChange}  className='form-control'></input>
 </div>
 
 <div>
 <label>Title</label>
-<input type='text' name='title'  onChange={handleChange} className='form-control'></input>
+<input type='text' name='title' value={editCourse.title} onChange={handleChange} className='form-control'></input>
 </div>
 
 <div>
     <label>Duration</label>
-    <input type='number' name='duration'  onChange={handleChange} className='form-control'></input>
+    <input type='string' name='duration' value={editCourse.duration} onChange={handleChange} className='form-control'></input>
 </div>
 
 
 <div>
     <label>Description</label>
-    <input type='text' name='description'  onChange={handleChange} className='form-control'></input>
+    <input type='text' name='description' value={editCourse.description} onChange={handleChange} className='form-control'></input>
 </div>
 
 <div>
     <label>Price</label>
-    <input type='number' name='price'  onChange={handleChange} className='form-control'></input>
+    <input type='number' name='price' value={editCourse.price}  onChange={handleChange} className='form-control'></input>
 </div>
 
     <div>
