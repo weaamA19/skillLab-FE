@@ -2,40 +2,35 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import CartItem from './CartItem'
-import cartData  from '../../db';
 
-export default function CartList({ userId }) {
+export default function CartList() {
 
-  const [cartItems, setCartItems] = useState(cartData);
-
-
+  const [cartItems, setCartItems] = useState([]);
   useEffect(() => {
     loadCart();
   }, []);
 
   const loadCart = () => {
-    // Axios.get(`/cart/${userId}`)
-    //   .then((response) => {
-    //     console.log(response);
-    //     setCartItems(response.data.cart.courses);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    setCartItems(cartData)
+    Axios.get(`cart/index?id=6591474b6524e144737adbcc`) //${user_id}
+      .then((response) => {
+        console.log(response);
+        setCartItems(response.data.cart.courses);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const removeItem = (itemId) => {
-    // Axios.delete(`/cart/${userId}/item/${itemId}`)
-    //   .then((response) => {
-    //     console.log(response);
-    //     loadCart();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-      const updatedCart = cartItems.filter(course => course._id !== itemId);
-      setCartItems(updatedCart);
+  const removeItem = (course_id) => { //user_id
+
+    Axios.delete(`/cart/6591474b6524e144737adbcc/courses/${course_id}`)  //`/cart/${user_id}/courses/${course_id}`
+      .then((response) => {
+        console.log(response);
+        loadCart();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   console.log(cartItems);

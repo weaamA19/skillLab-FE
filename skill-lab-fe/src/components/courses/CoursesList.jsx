@@ -33,7 +33,7 @@ export default function CoursesList(props) {
     Axios.post("courses/add", courses)
     .then(res =>{
     console.log('Course has been Added') 
- loadCoursesList()
+    loadCoursesList()
   })
    
     .catch(err => {

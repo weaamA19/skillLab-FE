@@ -5,15 +5,15 @@ export default function CartItem({ course, onRemoveItem }) {
   
   return (
     <div className="cart-item">
-      {course.courses.map((courseItem) => (
-        <div key={courseItem._id}>
-          <h3>{courseItem.title}</h3>
-          <p>Duration: {courseItem.duration}</p>
-          <p>Description: {courseItem.description}</p>
-          <p>Price: ${courseItem.price}</p>
-          <button onClick={() => onRemoveItem(courseItem._id)}>Remove</button>
+      {/* {course.courses.map((courseItem) => ( */}
+        <div key={course._id}>
+          <h3>{course.title}</h3>
+          <p>Duration: {course.duration}</p>
+          <p>Description: {course.description}</p>
+          <p>Price: ${course.price}</p>
+          <button onClick={() => onRemoveItem(course._id)}>Remove</button>
         </div>
-      ))}
+      {/* ))} */}
     </div>
   );
 }

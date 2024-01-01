@@ -5,7 +5,7 @@ export default function Courses(props) {
     <>
         <td>{props.category
 }</td>
-       {console.log(props.category)}
+       {console.log(props)}
          <td>{props.title}</td>
          <td>{props.duration}</td>
          <td>{props.description}</td>

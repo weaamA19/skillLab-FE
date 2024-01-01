@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Axios from 'axios'
 import CartList from './components/cart/CartList'
 import { Routes, Route, Link } from "react-router-dom"
+import Categories from './components/home/categories'
 
 // CartList
 
@@ -54,10 +55,11 @@ export default function App() {
       </div>
     </nav>
 
-      <CoursesList></CoursesList>
-      <TransactionsList></TransactionsList>
+      {/* <CoursesList></CoursesList> */}
+      {/* <TransactionsList></TransactionsList> */}
       {/* <CategoryList></CategoryList> */}
       {/* <CartList></CartList> */}
+      <Categories></Categories>
     </div>
   )
 }
