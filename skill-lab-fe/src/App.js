@@ -10,6 +10,7 @@ import Signup from './components/user/Signup';
 import Signin from './components/user/Signin';
 import {jwtDecode} from 'jwt-decode';
 import Categories from './components/home/categories'
+import Home from './components/home/home';
 
 
 // CartList
@@ -112,29 +113,27 @@ export default function App() {
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-
-
         
         <a className="navbar-brand">SkillLab</a>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page">Home</a>
-              </li>
               {isAdmin ? (
-                <>
+                <>   
+
+              {/* //all new */}
+
               <li className="nav-item">
-                <a className="nav-link"><Link to='/'>Courses</Link></a>
+                <a className="nav-link"><Link to='/'>Home</Link></a>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="#">Courses</a>
+                <a className="nav-link" ><Link to='/courses/index'>Courses</Link></a>
               </li>
               </>
               ):(
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Categories</a>
+                  <a className="nav-link" ><Link to='/category/index'>Categories</Link></a>
                 </li>
                 )}
   
@@ -159,11 +158,13 @@ export default function App() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">Home</a>
+                <a className="nav-link active" aria-current="page" ><Link to='/'>Home</Link></a>
               </li>
-              {/* <li className="nav-item">
-                <a className="nav-link" href="#">Categories</a>
-              </li> */}
+
+
+              <li className="nav-item">
+                <a className="nav-link" ><Link to='/category/index'>Categories</Link></a>
+              </li>
 
              
              
@@ -185,18 +186,30 @@ export default function App() {
 
     <div>
         <Routes>
-          <Route path='/' element={isAuth ? <CoursesList/> : <Signin login={loginHandler}/>}/>
-          <Route path='/signup' element={<Signup register={registerHandler}/>}/>
-          <Route path='/signin' element={isAuth ? <CoursesList/> : <Signin login={loginHandler}/>}/>
+          <Route path='/' element={<Home/> }/>
 
+          {/* <Route path='/' element={isAuth ? <Home/> : <Signin login={loginHandler}/>}/> */}
+          <Route path='/signup' element={<Signup register={registerHandler}/>}/>
+          <Route path='/signin' element={isAuth ? <Categories/> : <Signin login={loginHandler}/>}/>
+
+          {/* //new */}
+          <Route path='/courses' element={CoursesList}></Route>
+          <Route path='/transactions' element={TransactionsList}></Route>
+          <Route path='category' element={CategoryList}></Route>
+          <Route path='/cart' element={CartList}></Route>
+          <Route path='/category' element={Categories}></Route>
+          {/* <Route path="/courses/detail/:id" element={<CourseDetails />} /> */}
         </Routes>
       </div>
-
+      
       {/* <CoursesList></CoursesList>
       <TransactionsList></TransactionsList> */}
       {/* <CategoryList></CategoryList> */}
       {/* <CartList></CartList> */}
       {/* <Categories></Categories> */}
+     {/* <Home></Home> */}
+      
+
     </div>
   )
 }

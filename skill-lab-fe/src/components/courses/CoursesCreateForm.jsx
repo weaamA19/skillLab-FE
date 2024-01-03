@@ -2,35 +2,18 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react';
 import Axios from 'axios'
-import Category from '../category/Category';
 export default function CoursesCreateForm(props) {
 
     const [newCourse, setNewCourse] = useState({})
 
 //doing this step to get data 
     const [categories, setCategories] = useState([]);
-
+///debugging purposes
+    console.log(categories)
     useEffect(() => {
       fetchCategories();
     }, []);
   
-    // const fetchCategories = async () => {
-    //   try {
-    //     const response = await Axios.get("category/index")
-    //     .then((res) => {
-    //         console.log(res.data.categories)
-    //         setCategories(res.data.categories);
-    //     })
-    //     .catch(err => {
-    //         console.log("error")
-    //         console.log(err)
-    //     })
-       
-    //   } 
-    //   catch (err) {
-    //     console.error('Error fetching categories:', err);
-    //   }
-    // };
 
     const fetchCategories = () =>{
     
@@ -73,11 +56,12 @@ export default function CoursesCreateForm(props) {
 <label>Category</label>
 <select name="category_id" onChange={handleChange} className="form-control">
   {categories.map((category) => (
+    
     <option key={category._id} value={category._id}>{category.name}</option>
+   
   ))}
+  
 </select>
-
-
 
 </div>
 
