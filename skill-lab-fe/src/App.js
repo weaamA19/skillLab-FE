@@ -10,9 +10,9 @@ import Signup from './components/user/Signup';
 import Signin from './components/user/Signin';
 import {jwtDecode} from 'jwt-decode';
 import Categories from './components/home/categories'
-
-
-// CartList
+import CourseDetails from './components/home/courseDetails'
+import CoursesByCategory from './components/home/coursesByCategory';
+import FileUpload from './components/home/installingMulter';
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -185,15 +185,20 @@ export default function App() {
 
     <div>
         <Routes>
-          <Route path='/' element={isAuth ? <CoursesList/> : <Signin login={loginHandler}/>}/>
+          <Route path='/' element={isAuth ? <FileUpload /> : <Signin login={loginHandler} />} />
           <Route path='/signup' element={<Signup register={registerHandler}/>}/>
-          <Route path='/signin' element={isAuth ? <CoursesList/> : <Signin login={loginHandler}/>}/>
+          <Route path='/signin' element={isAuth ? <FileUpload /> : <Signin login={loginHandler} />} />
+
+          {/* Donot Change the folloing Paths */}
+          <Route path="/courses/detail/:id" element={<CourseDetails />} />
+          <Route path="/courses/coursesByCategory/:categoryId" element={<CoursesByCategory />} />
+          <Route path="/transactions/:cartId" element={<CoursesByCategory />} />
 
         </Routes>
       </div>
 
-      {/* <CoursesList></CoursesList>
-      <TransactionsList></TransactionsList> */}
+      {/* <CoursesList></CoursesList> */}
+      {/* <TransactionsList></TransactionsList> */}
       {/* <CategoryList></CategoryList> */}
       {/* <CartList></CartList> */}
       {/* <Categories></Categories> */}

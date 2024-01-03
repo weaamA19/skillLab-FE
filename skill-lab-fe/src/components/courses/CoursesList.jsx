@@ -107,7 +107,7 @@ const allTheCourses = courses.map((courses , index) => (
     <div>
        <div>
          <table className="table table-stripes">
-          <tbody>
+          <thead>
             <tr>
               <th>Category</th>
               <th>Title</th>
@@ -117,8 +117,8 @@ const allTheCourses = courses.map((courses , index) => (
              <th>Edit</th>
              <th>Delete</th>
             </tr>   
-          </tbody>
-          {allTheCourses}
+          </thead>
+          <tbody>{allTheCourses}</tbody>
         </table>
     </div>
     {(!isEdit) ? 

@@ -3,9 +3,8 @@ import React from 'react'
 export default function Courses(props) {
   return (
     <>
-        <td>{props.category
-}</td>
-       {console.log(props)}
+        <td>{props.category_id.name}</td>
+       {/* {console.log(props.category_id.name)} */}
          <td>{props.title}</td>
          <td>{props.duration}</td>
          <td>{props.description}</td>
