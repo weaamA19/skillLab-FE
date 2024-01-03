@@ -1,9 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
+import Axios from 'axios'
 
 export default function CoursesEditForm(props) {
 
     const [editCourse, setEditCourse] = useState(props.courses)
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+      fetchCategories();
+    }, []);
+  
+
+    const fetchCategories = () =>{
+    
+    Axios.get('category/index')
+    .then((res) => {
+        console.log(res.data.categories)
+        setCategories(res.data.categories)
+    })
+    .catch((err) => {
+        console.log("err")
+        console.log(err)
+    })
+
+    }
+console.log(categories)
 
     const handleChange = (event) => {
     const attributeToChange = event.target.name
@@ -33,7 +55,11 @@ export default function CoursesEditForm(props) {
 <form onSubmit={handleSubmit} >
 <div>
 <label>Category</label>
-<input type='text' name='category_id' value={editCourse.category} onChange={handleChange}  className='form-control'></input>
+<select name="category_id" onChange={handleChange} className="form-control">
+  {categories.map((category) => (
+    <option key={category._id} value={category._id}>{category.name}</option>
+  ))}
+</select>
 </div>
 
 <div>

@@ -12,7 +12,8 @@ import { Routes, Route, Link, Navigate } from "react-router-dom";
 import Signup from './components/user/Signup';
 import Signin from './components/user/Signin';
 import {jwtDecode} from 'jwt-decode';
-import Categories from './components/home/categories';
+import Categories from './components/home/categories'
+import Home from './components/home/home';
 import UserIndex from './components/user/UserIndex';
 import UserEditForm from './components/user/UserEditForm';
 
@@ -130,7 +131,7 @@ export default function App() {
               {isAdmin ? (
                 <>
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/category' className='text-decoration-none text-light'>Categories</Link></a>
+                    <a className="nav-link"><Link to='/category/index' className='text-decoration-none text-light'>Categories</Link></a>
                   </li>
 
                   <li className="nav-item">
@@ -138,7 +139,7 @@ export default function App() {
                   </li>
 
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/courses' className='text-decoration-none text-light'>Courses</Link></a>
+                    <a className="nav-link"><Link to='/courses/index' className='text-decoration-none text-light'>Courses</Link></a>
                   </li>
 
                   <li className="nav-item">
@@ -152,11 +153,11 @@ export default function App() {
               ):(
                 <>
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/category' className='text-decoration-none text-light'>Categories</Link></a>
+                    <a className="nav-link"><Link to='/category/index' className='text-decoration-none text-light'>Categories</Link></a>
                   </li>
 
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/courses' className='text-decoration-none text-light'>Courses</Link></a>
+                    <a className="nav-link"><Link to='/courses/index' className='text-decoration-none text-light'>Courses</Link></a>
                   </li>
 
                   <li className="nav-item">
@@ -219,23 +220,33 @@ export default function App() {
 
     <div>
         <Routes>
-          <Route path='/' element={isAuth ? <CoursesList/> : <Signin login={loginHandler}/>}/>
-          <Route path='/signup' element={<Signup register={registerHandler}/>}/>
+        <Route path='/' element={<Home/> }/>
           <Route path='/category' element={isAuth ? <CategoryList user = {userData}/> : <Signin login={loginHandler}/>}/>
           <Route path='/courses' element={isAuth ? <CoursesList user = {userData}/> : <Signin login={loginHandler}/>}/>
           <Route path='/cart/index' element={isAuth ? <CartList user = {userData}/> : <Signin login={loginHandler}/>}/>
           <Route path='/profile' element={userData ?<UserIndex getUser={getUser} user={userData}/>:""}/>
           <Route path='/editProfile' element={<UserEditForm getUser={getUser} user={userData}/>}/>
-          <Route path='/signin' element={isAuth ? <CoursesList/> : <Signin login={loginHandler}/>}/>
+          {/* <Route path='/signin' element={isAuth ? <CoursesList/> : <Signin login={loginHandler}/>}/> */}
 
+          {/* <Route path='/' element={isAuth ? <Home/> : <Signin login={loginHandler}/>}/> */}
+          <Route path='/signup' element={<Signup register={registerHandler}/>}/>
+          <Route path='/signin' element={isAuth ? <Categories/> : <Signin login={loginHandler}/>}/>
+
+          {/* //new */}
+         
+          <Route path='/transactions' element={TransactionsList}></Route>
+          {/* <Route path="/courses/detail/:id" element={<CourseDetails />} /> */}
         </Routes>
       </div>
-
+      
       {/* <CoursesList></CoursesList>
       <TransactionsList></TransactionsList> */}
       {/* <CategoryList></CategoryList> */}
       {/* <CartList></CartList> */}
       {/* <Categories></Categories> */}
+     {/* <Home></Home> */}
+      
+
     </div>
   )
 }
