@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 export default function CartList() {
 
   const [cartItems, setCartItems] = useState([]);
+  const [finishedOrder, setFinishedOrder] = useState(false)
+
+
   useEffect(() => {
     loadCart();
   }, []);
@@ -36,6 +39,19 @@ export default function CartList() {
 
   console.log(cartItems);
 
+
+const placeOrder = () => {
+  setFinishedOrder(true)
+  setCartItems([])
+
+  setTimeout(()=>{
+    setFinishedOrder(false)
+
+  }, 1500)
+ 
+}
+
+
   return (
     <div>
       <h1>Cart</h1>
@@ -43,9 +59,11 @@ export default function CartList() {
         <p>Your cart is empty!!</p>
       ) : (
         cartItems.map((course) => (
-          <CartItem key={course._id} course={course} onRemoveItem={removeItem} />
-        ))
+          
+          <CartItem key={course._id} course={course} onRemoveItem={removeItem} placingOrder={placeOrder}  />
+        ))        
       )}
+      {finishedOrder && (<p>You've been enrolled!!</p>)}
       <Link to="/cart/transaction">Proceed To Payment</Link>
     </div>
   );

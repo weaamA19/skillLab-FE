@@ -1,11 +1,14 @@
 import React, { useState, useEffect} from 'react'
+import logo from './logo.svg';
 import CoursesList from './components/courses/CoursesList'
 import TransactionsList from './components/transactions/TransactionsList'
 import CategoryList from './components/category/CategoryList'
 import "bootstrap/dist/css/bootstrap.min.css";
-import Axios from 'axios'
-import CartList from './components/cart/CartList'
-import { Routes, Route, Link } from "react-router-dom"
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import './index.css';
+import Axios from 'axios';
+import CartList from './components/cart/CartList';
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import Signup from './components/user/Signup';
 import Signin from './components/user/Signin';
 import {jwtDecode} from 'jwt-decode';
@@ -13,6 +16,12 @@ import Categories from './components/home/categories'
 import CourseDetails from './components/home/courseDetails'
 import CoursesByCategory from './components/home/coursesByCategory';
 import FileUpload from './components/home/installingMulter';
+import Home from './components/home/home';
+import UserIndex from './components/user/UserIndex';
+import UserEditForm from './components/user/UserEditForm';
+
+
+// CartList
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -35,7 +44,6 @@ export default function App() {
     }
 
     loadUserData();
-
   }, [])
   
 
@@ -61,6 +69,9 @@ export default function App() {
         console.log(user);
         user ? setIsAuth(true) : setIsAuth(false)
         user? setUser(user) : setUser(null)
+
+        // Load user data after setting authentication state
+        loadUserData();
       }
     })
     .catch(err =>{
@@ -71,7 +82,9 @@ export default function App() {
   }
 
   const loadUserData = () => {
-    Axios.get(`user/signedin?id=6591b65713f121a6156aa700`)
+    const userId = getUser()?.id;
+    console.log(userId)
+    Axios.get(`user/signedin?id=${userId}`)
     .then(res => {
       console.log(res);
       setUserData(res.data.user)
@@ -99,101 +112,134 @@ export default function App() {
     setUser(null);
   }
 
-  const isAdmin = user && userData.userType === 1;
-  
-  // const isStudent = user && userData.userType === 2;
+  const isAdmin = userData.userType === "1";
+
+
 
   return (
     <div>
+      <header className="bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div className="col-md-2 mb-2 mb-md-0">
+        <a href="/" className="d-inline-flex link-body-emphasis text-decoration-none">
+         <img src={logo} className='w-100 h-25' alt="logo"/>
+        </a>
+      </div>
+      { isAuth ? (
+      <>
 
-<nav className="navbar navbar-expand-lg bg-body-tertiary">
-{ isAuth ? (
-      <div className="container-fluid">
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-
-        
-        <a className="navbar-brand">SkillLab</a>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page">Home</a>
+      <ul className="nav col-10 col-md-auto mb-2 justify-content-center mb-md-0">
+         <li className="nav-item">
+                <a className="nav-link active" aria-current="page"><Link to='/' className='text-decoration-none text-light'>Home</Link></a>
               </li>
               {isAdmin ? (
                 <>
-              <li className="nav-item">
-                <a className="nav-link"><Link to='/'>Courses</Link></a>
-              </li>
+                  <li className="nav-item">
+                    <a className="nav-link"><Link to='/category/index' className='text-decoration-none text-light'>Categories</Link></a>
+                  </li>
 
-              <li className="nav-item">
-                <a className="nav-link" href="#">Courses</a>
-              </li>
-              </>
+                  <li className="nav-item">
+                    <a className="nav-link text-light">Add Category</a>
+                  </li>
+
+                  <li className="nav-item">
+                    <a className="nav-link"><Link to='/courses/index' className='text-decoration-none text-light'>Courses</Link></a>
+                  </li>
+
+                  <li className="nav-item">
+                    <a className="nav-link text-light">Add Course</a>
+                  </li>
+
+                  <li className="nav-item">
+                    <a className="nav-link"><Link to='/cart' className='text-decoration-none text-light'>Cart</Link></a>
+                  </li>
+                </>
               ):(
-                <li className="nav-item">
-                  <a className="nav-link" href="#">Categories</a>
-                </li>
+                <>
+                  <li className="nav-item">
+                    <a className="nav-link"><Link to='/category/index' className='text-decoration-none text-light'>Categories</Link></a>
+                  </li>
+
+                  <li className="nav-item">
+                    <a className="nav-link"><Link to='/courses/index' className='text-decoration-none text-light'>Courses</Link></a>
+                  </li>
+
+                  <li className="nav-item">
+                    <a className="nav-link"><Link to='/cart/index' className='text-decoration-none text-light'>Cart</Link></a>
+                  </li>
+                </>
                 )}
+
+
   
 
-              <li className="nav-item">
-              <a className="nav-link"><Link to='/logout' onClick={onLogoutHandler}>Logout</Link></a>
-              </li>
-            </ul>
-          </div>
-
-      </div>
-       ) : (
-        <div className="container-fluid">
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-
-        
-        <a className="navbar-brand" href="/">SkillLab</a>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
               {/* <li className="nav-item">
-                <a className="nav-link" href="#">Categories</a>
+              <a className="nav-link"><Link to='/logout' onClick={onLogoutHandler}>Logout</Link></a>
               </li> */}
 
+
+      </ul>
+
+      <div className="col-md-2 dropdown">
+          <a href="#" className="d-block text-decoration-none dropdown-toggle text-light" data-bs-toggle="dropdown" aria-expanded="false">
+              {userData.username}
+              <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle ms-2"/>
+          </a>
+          <ul class="dropdown-menu text-small">
+          <li><a className="dropdown-item"><Link to='/profile' className='text-decoration-none text-dark'>Profile</Link></a></li>
+            <li><a className="dropdown-item"><Link to='/cart/index' className='text-decoration-none text-dark'>Cart</Link></a></li>
+            <li><a className="dropdown-item" href="#">My Orders</a></li>
+            <li><hr className="dropdown-divider"/></li>
+            <li><a className="dropdown-item" href="#"><Link to='/logout' onClick={onLogoutHandler}>Sign out</Link></a></li>
+          </ul>
+        </div>
+        </>
+	):(
+    <>
+      <ul className="nav col-8 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li className="nav-item">
+          <a className="nav-link active" aria-current="page"><Link to="/" className='text-decoration-none text-light'>Home</Link></a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link">Categories</a>
+        </li>
              
-             
-              <li className="nav-item">
-                <a className="nav-link"><Link to='/signin'>Sign In</Link></a>
-              </li>
+        <li className="nav-item">
+          <a className="nav-link"><Link to='/signin' className='text-decoration-none text-light'>Sign In</Link></a>
+        </li>
 
 
-              <li className="nav-item">
-                <a className="nav-link"><Link to='/signup'>Sign Up</Link></a>
-              </li>
-            </ul>
-          </div>
+        <li className="nav-item">
+          <a className="nav-link"><Link to='/signup'className='text-decoration-none text-light'>Sign Up</Link></a>
+        </li>
+      </ul>
 
+      <div className="col-md-2 text-end">
+        <Link to='/signin'><button type="button" className="btn btn-outline-primary me-2">Login</button></Link>
+        <Link to='/signup'><button type="button" className="btn btn-primary">Sign Up</button></Link>
       </div>
-       )
-      }
-    </nav>
+        </>
+)}
+    </header>
 
     <div>
         <Routes>
-          <Route path='/' element={isAuth ? <FileUpload /> : <Signin login={loginHandler} />} />
+        <Route path='/' element={<Home/> }/>
+          <Route path='/category' element={isAuth ? <CategoryList user = {userData}/> : <Signin login={loginHandler}/>}/>
+          <Route path='/courses' element={isAuth ? <CoursesList user = {userData}/> : <Signin login={loginHandler}/>}/>
+          <Route path='/cart/index' element={isAuth ? <CartList user = {userData}/> : <Signin login={loginHandler}/>}/>
+          <Route path='/profile' element={userData ?<UserIndex getUser={getUser} user={userData}/>:""}/>
+          <Route path='/editProfile' element={<UserEditForm getUser={getUser} user={userData}/>}/>
+          {/* <Route path='/signin' element={isAuth ? <CoursesList/> : <Signin login={loginHandler}/>}/> */}
+
+          {/* <Route path='/' element={isAuth ? <Home/> : <Signin login={loginHandler}/>}/> */}
           <Route path='/signup' element={<Signup register={registerHandler}/>}/>
-          <Route path='/signin' element={isAuth ? <FileUpload /> : <Signin login={loginHandler} />} />
+          <Route path='/signin' element={isAuth ? <Categories/> : <Signin login={loginHandler}/>}/>
+          <Route path='/transactions' element={TransactionsList}></Route>
 
           {/* Donot Change the folloing Paths */}
           <Route path="/courses/detail/:id" element={<CourseDetails />} />
           <Route path="/courses/coursesByCategory/:categoryId" element={<CoursesByCategory />} />
           <Route path="/transactions/:cartId" element={<CoursesByCategory />} />
-
         </Routes>
       </div>
 
@@ -202,6 +248,9 @@ export default function App() {
       {/* <CategoryList></CategoryList> */}
       {/* <CartList></CartList> */}
       {/* <Categories></Categories> */}
+     {/* <Home></Home> */}
+      
+
     </div>
   )
 }
