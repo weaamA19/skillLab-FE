@@ -20,6 +20,7 @@ import Home from './components/home/home';
 import UserIndex from './components/user/UserIndex';
 import UserEditForm from './components/user/UserEditForm';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import profile from './profile.svg';
 
 
 // CartList
@@ -163,12 +164,10 @@ export default function App() {
                 </>
               ):(
                 <>
-                  <li className="nav-item">
-                    <a className="nav-link"><Link to='/category' className='text-decoration-none text-light'>Categories</Link></a>
-                  </li>
+
 
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/courses' className='text-decoration-none text-light'>Courses</Link></a>
+                    <a className="nav-link"><Link to='/mycourses' className='text-decoration-none text-light'>Courses</Link></a>
                   </li>
 
                   <li className="nav-item">
@@ -191,7 +190,7 @@ export default function App() {
       <div className="dropdown text-end">
           <a href="#" className="d-block text-decoration-none dropdown-toggle text-light" data-bs-toggle="dropdown" aria-expanded="false">
               {userData.username}
-              <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle ms-2"/>
+              <img src={profile} alt="Profile image" width="32" height="32" class="rounded-circle ms-2"/>
           </a>
           <ul class="dropdown-menu text-small z-3">
           <li><a className="dropdown-item"><Link to='/profile' className='text-decoration-none text-dark'>Profile</Link></a></li>
