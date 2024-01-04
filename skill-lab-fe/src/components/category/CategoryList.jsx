@@ -103,9 +103,15 @@ const allcategory = category.map((category) => (
 
   return (
     <div>
-      <h1>Category List</h1>
-      <div>
-        <table className="table table-stripes">
+       {/* {(!isEdit) ?
+      <CategoryCreateForm addCategory = {addCategory}></CategoryCreateForm>
+        :
+        <CategoryEditForm key={currentCategory._id} category={currentCategory} updateCategory={updateCategory} ></CategoryEditForm>
+      } */}
+      <h2 className='text-center mt-4'>Category List</h2>
+      <div className='row d-flex justify-content-center align-items-center text-center table table-bordered mb-2'>
+      <div className='col-md-7 '>
+        <table className="table table-stripes table mt-4 table border-top">
           <tbody>
             <tr>
               <th>Category Name</th>
@@ -115,7 +121,10 @@ const allcategory = category.map((category) => (
             {allcategory}
           </tbody> 
         </table>
+       </div>
       </div>
+
+
       {(!isEdit) ?
       <CategoryCreateForm addCategory = {addCategory}></CategoryCreateForm>
         :

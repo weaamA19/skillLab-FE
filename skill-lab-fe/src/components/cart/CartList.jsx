@@ -48,18 +48,20 @@ export default function CartList() {
 
 
   return (
-    <div>
-      <h1>Cart</h1>
+    <div >
+      <h1 className='text-center mt-4'>Cart</h1>
       {cartItems.length === 0 ? (
-        <p>Your cart is empty!!</p>
+        <p className='text-center'>Your cart is empty!!</p>
       ) : (
         cartItems.map((course) => (
           
           <CartItem key={course._id} course={course} onRemoveItem={removeItem}  />
         ))        
       )}
-      <Link to='/transactions/:cartId'>Proceed to Transactions</Link>
-
+<div className='text-center'>
+      <Link to='/transactions/:cartId'  className='btn btn-secondary'>Proceed to Transactions</Link>
+      </div>
+    <br></br>
     </div>
   );
 }

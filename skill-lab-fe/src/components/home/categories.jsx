@@ -70,7 +70,7 @@ export default function Categories() {
                     >
                       <title>Placeholder</title>
                       <rect width="100%" height="100%" fill="#55595c" />
-                      <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                      <text x="50%" y="50%" fill="#eceeef" dy=".3em"  className="text-center">
                         {category.name} {/* Display category name */}
                       </text>
                     </svg>

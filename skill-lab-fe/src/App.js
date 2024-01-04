@@ -19,6 +19,10 @@ import FileUpload from './components/home/installingMulter';
 import Home from './components/home/home';
 import UserIndex from './components/user/UserIndex';
 import UserEditForm from './components/user/UserEditForm';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+
+// CartList
 import CartTotal from './components/cart/CartTotal';
 import PlaceOrder from './components/cart/PlaceOrder';
 import MyCourses from './components/user/MyCourses';
@@ -257,13 +261,17 @@ export default function App() {
 
         </Routes>
       </div>
-
-      {/* <CoursesList></CoursesList> */}
+{/* 
+      <CoursesList></CoursesList> */}
       {/* <TransactionsList></TransactionsList> */}
       {/* <CategoryList></CategoryList> */}
       {/* <CartList></CartList> */}
       {/* <Categories></Categories> */}
      {/* <Home></Home> */}
+      {/* <coursesDetails></coursesDetails> */}
+      {/* <CoursesByCategory></CoursesByCategory> */}
+
+   {/* <FileUpload></FileUpload> */}
       {/* <CartTotal /> */}
       {/* <FileUpload /> */}
     </div>

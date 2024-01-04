@@ -107,9 +107,10 @@ const allTheTransactions = transactions.map((transactions , index) => (
 
   return (
     <div>
-
-       <div>
-         <table className="table table-stripes">
+      <h2 className='text-center mt-4'>Transactions List</h2>
+<div className='row d-flex justify-content-center align-items-center text-center mb-2 table table-bordered'>
+       <div className='col-md-7'>
+         <table className="table table-stripes table mt-4 table border-top bottom border">
           <tbody>
             <tr>
             <th>Amount</th> 
@@ -120,6 +121,7 @@ const allTheTransactions = transactions.map((transactions , index) => (
           {allTheTransactions}
         </table>
     </div>
+</div>
     {(!isEdit) ? 
       <TransactionsCreateForm addTransactions={addTransactions}></TransactionsCreateForm>
       :
