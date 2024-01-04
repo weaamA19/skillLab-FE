@@ -105,8 +105,10 @@ const allTheCourses = courses.map((courses , index) => (
 
   return (
     <div>
-       <div>
-         <table className="table table-stripes">
+      <h2 className='text-center mt-4'>Courses List</h2>
+       <div  className='row d-flex justify-content-center align-items-center text-center table table-bordered mb-2'>
+       <div className='col-md-7 '>
+         <table className="table table-stripes table mt-4 table border-top">
           <thead>
             <tr>
               <th>Category</th>
@@ -120,6 +122,7 @@ const allTheCourses = courses.map((courses , index) => (
           </thead>
           <tbody>{allTheCourses}</tbody>
         </table>
+        </div>
     </div>
     {(!isEdit) ? 
       <CoursesCreateForm addCourses={addCourses}></CoursesCreateForm>

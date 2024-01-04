@@ -49,47 +49,65 @@ export default function CoursesCreateForm(props) {
 
   return (
     <div>
-   <h1>Create Course</h1>
+   <h2 className='text-center'>Create Course</h2>
 
 <form onSubmit={handleSubmit} >
-<div>
+
+<>
+<div  className='row d-flex justify-content-center align-items-center'>
+  <div className='col-md-6'>
 <label>Category</label>
 <select name="category_id" onChange={handleChange} className="form-control">
   {categories.map((category) => (
-    
-    <option key={category._id} value={category._id}>{category.name}</option>
-   
-  ))}
-  
+    <option key={category._id} value={category._id}>{category.name}</option>  
+  ))}  
 </select>
-
 </div>
 
-<div>
+</div >
+
+<div className='row d-flex justify-content-center align-items-center'>
+<div className='col-md-6'>
 <label>Title</label>
 <input type='text' name='title' onChange={handleChange} className='form-control'></input>
 </div>
+</div>
 
-<div>
+
+<div className='row d-flex justify-content-center align-items-center'>
+<div  className='col-md-6'>
     <label>Duration</label>
     <input type='string' name='duration' onChange={handleChange} className='form-control'></input>
 </div>
+</div>
 
 
-<div>
+<div className='row d-flex justify-content-center align-items-center'>
+<div  className='col-md-6'>
     <label>Description</label>
     <input type='text' name='description' onChange={handleChange} className='form-control'></input>
 </div>
+</div>
 
-<div>
+
+<div  className='row d-flex justify-content-center align-items-center'>
+<div  className='col-md-6'>
     <label>Price</label>
     <input type='string' name='price' onChange={handleChange} className='form-control'></input>
 </div>
+</div>
 
-    <div>
-        <input type='submit' value="Add Course" className='btn btn-primary'></input>
+<br></br>
+
+   <div  className='row d-flex justify-content-center align-items-center text-center' >
+    <div  className='col-md-6'>
+        <input type='submit' value="Add Course" className='btn btn-secondary '></input>
     </div>
+    </div>
+    </>
+    <br></br>
     </form>
+
 </div>
   )
 }

@@ -23,17 +23,18 @@ export default function CourseDetails() {
       };
 
   return (
-    <div>
-        <div>
-              <h1>{courses.title}</h1>  
-            <button>Enroll Now</button> 
-        </div>
-          
-          <div>
-              <h3>{courses.duration}</h3>  
-              <h3>{courses.description}</h3>  
-              <h3>{courses.price}</h3>  
-        </div>
+   <div className="container">
+  <div className="card mx-auto text-center col-md-7">
+    <div className="card-body ">
+      <h2>{courses.title}</h2>
     </div>
+    <div className="card-body">
+      <h4>{courses.duration}</h4>
+      <h4>{courses.description}</h4>
+      <h4>{courses.price}</h4>
+      <button className="btn btn-secondary">Enroll Now</button>
+    </div>
+  </div>
+</div>
   )
 }

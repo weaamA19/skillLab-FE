@@ -25,20 +25,27 @@ export default function TransactionsCreateForm(props) {
 
   return (
     <div>
-   <h1>Edit Transaction</h1>
+   <h2 className='text-center'>Edit Transaction</h2>
 
 <form onSubmit={handleSubmit} >
 
-
-<div>
+   <div className='row d-flex justify-content-center align-items-center'>
+<div className='col-md-6'>
 <label>Amount</label>
 <input type='text' name='amount' value={editTransaction.amount} onChange={handleChange} className='form-control'></input>
 </div>
+   </div>
 
-    <div>
-        <input type='submit' value="Edit Transaction" className='btn btn-primary'></input>
+<br></br>
+
+<div className='row d-flex justify-content-center align-items-center text-center'>
+    <div className='col-md-6'>
+        <input type='submit' value="Edit Transaction" className='btn btn-secondary'></input>
     </div>
+
+ </div>
     </form>
+    <br></br>
 </div>
   )
 }

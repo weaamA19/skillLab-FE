@@ -23,16 +23,28 @@ export default function CategoryCreateForm(props) {
     
   return (
     <div>
-          <h1>Create Category</h1>
+          <h2 className='text-center'>Create Category</h2>
           <form onSubmit={handleSubmit}>
-              <div>
+
+        <div className='row d-flex justify-content-center align-items-center'>
+              <div className='col-md-6'>
                   <label> Category Name</label>
                   <input type='text' className="form-control" name='name' onChange={handleChange}></input>
               </div>
+        </div>
 
-              <div>
-                  <input type='submit' className="btn btn-primary" value="Add Category"/>
+<br></br>
+
+        <div className='row d-flex justify-content-center align-items-center text-center'>
+              <div className='col-md-6'  >
+                  <input type='submit' className="btn btn-secondary" value="Add Category"/>
               </div>
+              
+             
+
+         </div>     
+         
+        <br></br>
           </form>
     </div>
   )

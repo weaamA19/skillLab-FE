@@ -22,16 +22,24 @@ export default function CategoryEditForm(props) {
     
   return (
     <div>
-          <h1>Edit Category</h1>
+          <h2 className='text-center'>Edit Category</h2>
           <form onSubmit={handleSubmit}>
-              <div>
+            <>
+            <div className='row d-flex justify-content-center align-items-center'>
+              <div className='col-md-6'>
                   <label>Name</label>
                   <input type='text' value={category.name} className="form-control" name='name' onChange={handleChange}></input>
               </div>
+            </div>
 
-              <div>
-                  <input type='submit' className="btn btn-primary" value="Update Category"/>
+ <br></br>
+            <div className='row d-flex justify-content-center align-items-center text-center'>
+              <div  className='col-md-6' >
+                  <input type='submit' className="btn btn-secondary" value="Update Category"/>
               </div>
+           </div>
+              </>
+              <br></br>
           </form>
     </div>
   )

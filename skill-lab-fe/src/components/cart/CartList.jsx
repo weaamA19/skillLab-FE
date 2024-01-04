@@ -14,7 +14,7 @@ export default function CartList() {
   }, []);
 
   const loadCart = () => {
-    Axios.get(`cart/index?id=65941f91c4d719411671a037`) //${user_id}
+    Axios.get(`cart/index?id=65951de759c85b96d95cfd1f`) //${user_id}
       .then((response) => {
         console.log("load cart",response);
         // set cartId
@@ -27,7 +27,7 @@ export default function CartList() {
 
   const removeItem = (course_id) => { //user_id
 
-    Axios.delete(`/cart/65941f91c4d719411671a037/courses/${course_id}`)  //`/cart/${user_id}/courses/${course_id}`
+    Axios.delete(`/cart/65951de759c85b96d95cfd1f/courses/${course_id}`)  //`/cart/${user_id}/courses/${course_id}`
       .then((response) => {
         console.log(response);
         loadCart();
@@ -53,10 +53,10 @@ const placeOrder = () => {
 
 
   return (
-    <div>
-      <h1>Cart</h1>
+    <div >
+      <h1 className='text-center mt-4'>Cart</h1>
       {cartItems.length === 0 ? (
-        <p>Your cart is empty!!</p>
+        <p className='text-center'>Your cart is empty!!</p>
       ) : (
         cartItems.map((course) => (
           
@@ -64,7 +64,10 @@ const placeOrder = () => {
         ))        
       )}
       {finishedOrder && (<p>You've been enrolled!!</p>)}
-      <Link to="/cart/transaction">Proceed To Payment</Link>
+   <div className='text-center'>
+      <Link to="/cart/transaction" className='btn btn-secondary'>Proceed To Payment</Link>
+    </div>
+    <br></br>
     </div>
   );
 }

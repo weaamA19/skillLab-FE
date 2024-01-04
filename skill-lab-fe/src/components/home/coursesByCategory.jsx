@@ -42,14 +42,14 @@ export default function CoursesByCategory() {
   return (
     <div>
         <div className="album py-5 bg-body-tertiary">
-          <h2>Courses for {getCategoryNameById(selectedCategory)}</h2>
+          <h2 className='text-center'>Courses for {getCategoryNameById(selectedCategory)}</h2>
           <div className="container">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
               {courses.map((course) => (
                 <div key={course._id} className="col">
                   <div className="card shadow-sm">
                     <svg
-                      className="bd-placeholder-img card-img-top"
+                      className="bd-placeholder-img card-img-top text-center"
                       width="100%"
                       height="225"
                       xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,7 @@ export default function CoursesByCategory() {
                         {course.title} 
                       </text>
                     </svg>
-                    <div className="card-body">
+                    <div className="card-body d-flex flex-column align-items-center">
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="btn-group">
                         <Link to={`/courses/detail/${course._id}`} className="btn btn-sm btn-outline-secondary">
