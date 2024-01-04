@@ -20,7 +20,7 @@ import Home from './components/home/home';
 import UserIndex from './components/user/UserIndex';
 import UserEditForm from './components/user/UserEditForm';
 import CartTotal from './components/cart/CartTotal';
-import PlaceOrder from './components/cart/PlaceOrder'
+import PlaceOrder from './components/cart/PlaceOrder';
 import MyCourses from './components/user/MyCourses';
 
 export default function App() {
@@ -120,7 +120,7 @@ export default function App() {
     <div>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark z-0 align-items-center justify-content-center justify-content-md-between py-3 mb-4 nav-style">
       <div className="container-fluid">
-      <a class="navbar-brand col-lg-3 me-0" href="/"><img src={logo} className='img-sizing' alt="logo"/>
+      <a class="navbar-brand col-lg-3 me-0"><Link to="/categories"> <img src={logo} className='img-sizing' alt="logo"/></Link>
       </a>
 
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#skillLab-nav" aria-controls="skillLab-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,38 +133,38 @@ export default function App() {
       <div className="collapse d-lg-flex navbar-collapse" id="skillLab-nav">
       <ul className="navbar-nav col-lg-8 col-md-auto mb-2 justify-content-center mb-md-0">
          <li className="nav-item">
-                <a className="nav-link active" aria-current="page"><Link to='/' className='text-decoration-none text-light'>Home</Link></a>
+                <a className="nav-link active" aria-current="page"><Link to='/categories' className='text-decoration-none text-light'>Home</Link></a>
               </li>
               {isAdmin ? (
                 <>
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/category/index' className='text-decoration-none text-light'>Categories</Link></a>
+                    <a className="nav-link"><Link to='/category' className='text-decoration-none text-light'>Categories</Link></a>
                   </li>
 
-                  <li className="nav-item">
-                    <a className="nav-link text-light">Add Category</a>
-                  </li>
+                  {/* <li className="nav-item"> */}
+                    {/* <a className="nav-link text-light"><Link to='/category' className='text-decoration-none text-light'>Add Category</Link></a> */}
+                  {/* </li> */}
 
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/courses/index' className='text-decoration-none text-light'>Courses</Link></a>
+                    <a className="nav-link"><Link to='/courses' className='text-decoration-none text-light'>Courses</Link></a>
                   </li>
 
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <a className="nav-link text-light">Add Course</a>
-                  </li>
+                  </li> */}
 
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/cart' className='text-decoration-none text-light'>Cart</Link></a>
+                    <a className="nav-link"><Link to='/cart/index' className='text-decoration-none text-light'>Cart</Link></a>
                   </li>
                 </>
               ):(
                 <>
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/category/index' className='text-decoration-none text-light'>Categories</Link></a>
+                    <a className="nav-link"><Link to='/category' className='text-decoration-none text-light'>Categories</Link></a>
                   </li>
 
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/courses/index' className='text-decoration-none text-light'>Courses</Link></a>
+                    <a className="nav-link"><Link to='/courses' className='text-decoration-none text-light'>Courses</Link></a>
                   </li>
 
                   <li className="nav-item">
@@ -192,7 +192,7 @@ export default function App() {
           <ul class="dropdown-menu text-small z-3">
           <li><a className="dropdown-item"><Link to='/profile' className='text-decoration-none text-dark'>Profile</Link></a></li>
             <li><a className="dropdown-item"><Link to='/cart/index' className='text-decoration-none text-dark'>Cart</Link></a></li>
-            <li><a className="dropdown-item" href="#">My Orders</a></li>
+            <li><a className="dropdown-item"><Link to='/mycourses' className='text-decoration-none text-dark'>My Orders</Link></a></li>
             <li><hr className="dropdown-divider"/></li>
             <li><a className="dropdown-item" href="#"><Link to='/logout' onClick={onLogoutHandler}>Sign out</Link></a></li>
           </ul>
@@ -208,7 +208,7 @@ export default function App() {
           <a className="nav-link active" aria-current="page"><Link to="/" className='text-decoration-none text-light me-4'>Home</Link></a>
         </li>
         <li className="nav-item">
-          <a className="btn btn-light me-4">Our Courses</a>
+          <Link to="/categories" className="text-decoration-none text-light me-4"><a className="btn btn-light me-4">Our Courses</a></Link>
         </li>
 
         <li className="nav-item">
@@ -243,7 +243,8 @@ export default function App() {
 
           {/* <Route path='/' element={isAuth ? <Home/> : <Signin login={loginHandler}/>}/> */}
           <Route path='/signup' element={<Signup register={registerHandler}/>}/>
-          <Route path='/signin' element={isAuth ? <Categories/> : <Signin login={loginHandler}/>}/>
+          <Route path='/signin' element={isAuth ? <Categories /> : <Signin login={loginHandler} />} />
+          <Route path='/categories' element={<Categories/> }/>
           <Route path='/transactions' element={TransactionsList}></Route>
 
           {/* Donot Change the folloing Paths */}
