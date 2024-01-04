@@ -19,7 +19,7 @@ export default function CoursesList(props) {
   }, []);
 
   const loadCoursesList = () => {
-    Axios.get("courses/index")
+    Axios.get("/courses/index")
     .then((response) => {
       console.log(response);
       setCourses(response.data.courses);
@@ -30,7 +30,7 @@ export default function CoursesList(props) {
   }
 
   const addCourses = (courses) => {
-    Axios.post("courses/add", courses)
+    Axios.post("/courses/add", courses)
     .then(res =>{
     console.log('Course has been Added') 
     loadCoursesList()
@@ -44,7 +44,7 @@ export default function CoursesList(props) {
   }
 
   const editTheView = (id) => {
-   Axios.get(`courses/edit?id=${id}`)
+   Axios.get(`/courses/edit?id=${id}`)
    .then((res) => {
   console.log(res.data.courses) 
   console.log('Loaded the Information') 
@@ -61,7 +61,7 @@ setCurrentCourses(courses)
 
 
   const updateTheview = (courses) => {
-Axios.put("courses/update", courses )
+Axios.put("/courses/update", courses )
 
 .then(res => {
   console.log('Course has been Updated')
@@ -78,7 +78,7 @@ Axios.put("courses/update", courses )
 
 
   const deleteCourse = (id) => {
-Axios.delete(`courses/delete?id=${id}`)
+Axios.delete(`/courses/delete?id=${id}`)
 .then(res => {
   console.log('Course has been Deleted')
   console.log(res)

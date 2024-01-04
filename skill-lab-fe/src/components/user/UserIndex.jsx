@@ -27,7 +27,7 @@ export default function UserIndex({user, getUser}) {
   //   }
   const userInfo = () => {
   
-    Axios.get(`user/signedin?id=${getUser().id}`)
+    Axios.get(`/user/signedin?id=${getUser().id}`)
     .then((res) => {
       console.log(res);
       setUserDetails(res.data.user)
@@ -45,7 +45,7 @@ export default function UserIndex({user, getUser}) {
   }
 
   const updateUser = (user) => {
-    Axios.put('user/update', user)
+    Axios.put('/user/update', user)
     .then((res) => {
       console.log("User Updated Successfully!");
       console.log(res);

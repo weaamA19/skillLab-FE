@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CartItem({ course, onRemoveItem, placingOrder }) {
+export default function CartItem({ course, onRemoveItem }) {
 
   // const [finishedOrder, setFinishedOrder] = useState(false)
 //tho this would be a handler function
@@ -16,7 +16,7 @@ export default function CartItem({ course, onRemoveItem, placingOrder }) {
   // }
   
 
-  console.log(course);
+  // console.log(course);
   
   return (
     <div className="cart-item">
@@ -28,7 +28,6 @@ export default function CartItem({ course, onRemoveItem, placingOrder }) {
           <p>Price: ${course.price}</p>
           <button onClick={() => onRemoveItem(course._id)}>Remove</button>
           {/* ///here u'll put the handler function instead  */}
-          <button onClick={() => placingOrder(course._id)}>Place Order</button>
         </div>
       {/* ))} */}
     </div>

@@ -19,9 +19,9 @@ import FileUpload from './components/home/installingMulter';
 import Home from './components/home/home';
 import UserIndex from './components/user/UserIndex';
 import UserEditForm from './components/user/UserEditForm';
-
-
-// CartList
+import CartTotal from './components/cart/CartTotal';
+import PlaceOrder from './components/cart/PlaceOrder'
+import MyCourses from './components/user/MyCourses';
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -48,7 +48,7 @@ export default function App() {
   
 
   const registerHandler = (user) => {
-    Axios.post("user/signup", user)
+    Axios.post("/user/signup", user)
     .then(res => {
       console.log(res);
     })
@@ -58,7 +58,7 @@ export default function App() {
   }
 
   const loginHandler = (cred) => {
-    Axios.post("user/signin", cred)
+    Axios.post("/user/signin", cred)
     .then(res => {
       console.log(res.data.token);
       let token = res.data.token;
@@ -84,7 +84,7 @@ export default function App() {
   const loadUserData = () => {
     const userId = getUser()?.id;
     console.log(userId)
-    Axios.get(`user/signedin?id=${userId}`)
+    Axios.get(`/user/signedin?id=${userId}`)
     .then(res => {
       console.log(res);
       setUserData(res.data.user)
@@ -239,7 +239,11 @@ export default function App() {
           {/* Donot Change the folloing Paths */}
           <Route path="/courses/detail/:id" element={<CourseDetails />} />
           <Route path="/courses/coursesByCategory/:categoryId" element={<CoursesByCategory />} />
-          <Route path="/transactions/:cartId" element={<CoursesByCategory />} />
+          <Route path="/transactions/:cartId" element={<CartTotal />} />
+          <Route path="/place-order" element={<PlaceOrder />} />
+          <Route path='/mycourses' element={isAuth ? <MyCourses/> : <Signin login={loginHandler}/>}/>
+
+
         </Routes>
       </div>
 
@@ -249,8 +253,8 @@ export default function App() {
       {/* <CartList></CartList> */}
       {/* <Categories></Categories> */}
      {/* <Home></Home> */}
-      
-
+      {/* <CartTotal /> */}
+      {/* <FileUpload /> */}
     </div>
   )
 }
