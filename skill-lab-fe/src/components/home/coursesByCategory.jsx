@@ -64,8 +64,8 @@ export default function CoursesByCategory() {
                         {course.title} 
                       </text>
                     </svg>
-                    <div className="card-body d-flex flex-column align-items-center">
-                      <div className="d-flex justify-content-between align-items-center">
+                    <div className="card-body d-flex flex-column align-items-center text-center">
+                      <div className="d-flex justify-content-between align-items-center text-center">
                         <div className="btn-group">
                         <Link to={`/courses/detail/${course._id}`} className="btn btn-sm btn-outline-secondary">
                             View Course Details

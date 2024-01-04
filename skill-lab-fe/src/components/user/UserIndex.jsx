@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios';
 import UserEditForm from './UserEditForm';
+import profile from "../../profile.svg";
 
 export default function UserIndex({user, getUser}) {
   const [isEdit, setIsEdit] = useState(false);
@@ -66,9 +67,12 @@ export default function UserIndex({user, getUser}) {
     <div>
       {getUserInfo && console.log(getUserInfo)}
       <div className='row align-items-md-strech profile z-n1 h-75 w-100'>
-        <div className='col-md-6 bg-secondary-subtle pt-5 pe-2 profile-section'> 
+        <div className='col-md-6 bg-body-secondary pt-5 pe-2 profile-section'> 
           <div>
-            <h1 className="ms-4">Profile</h1>
+            <h1 className="ms-4 mb-4">Profile</h1>
+            <div className='d-flex flex-column justify-content-center align-items-center'>
+              <img src={profile} alt="Profile image" width="250" height="250" class="rounded-circle ms-2"/>
+            </div>
           </div>
         </div>
       <div className='col-md-6 pt-5 profile-section my-auto'>
