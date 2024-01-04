@@ -23,6 +23,9 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 // CartList
+import CartTotal from './components/cart/CartTotal';
+import PlaceOrder from './components/cart/PlaceOrder';
+import MyCourses from './components/user/MyCourses';
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -49,7 +52,7 @@ export default function App() {
   
 
   const registerHandler = (user) => {
-    Axios.post("user/signup", user)
+    Axios.post("/user/signup", user)
     .then(res => {
       console.log(res);
     })
@@ -59,7 +62,7 @@ export default function App() {
   }
 
   const loginHandler = (cred) => {
-    Axios.post("user/signin", cred)
+    Axios.post("/user/signin", cred)
     .then(res => {
       console.log(res.data.token);
       let token = res.data.token;
@@ -85,7 +88,7 @@ export default function App() {
   const loadUserData = () => {
     const userId = getUser()?.id;
     console.log(userId)
-    Axios.get(`user/signedin?id=${userId}`)
+    Axios.get(`/user/signedin?id=${userId}`)
     .then(res => {
       console.log(res);
       setUserData(res.data.user)
@@ -119,49 +122,53 @@ export default function App() {
 
   return (
     <div>
-      <header className="bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <div className="col-md-2 mb-2 mb-md-0">
-        <a href="/" className="d-inline-flex link-body-emphasis text-decoration-none">
-         <img src={logo} className='w-100 h-25' alt="logo"/>
-        </a>
-      </div>
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark z-0 align-items-center justify-content-center justify-content-md-between py-3 mb-4 nav-style">
+      <div className="container-fluid">
+      <a class="navbar-brand col-lg-3 me-0"><Link to="/categories"> <img src={logo} className='img-sizing' alt="logo"/></Link>
+      </a>
+
+      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#skillLab-nav" aria-controls="skillLab-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      
       { isAuth ? (
       <>
 
-      <ul className="nav col-10 col-md-auto mb-2 justify-content-center mb-md-0">
+      <div className="collapse d-lg-flex navbar-collapse" id="skillLab-nav">
+      <ul className="navbar-nav col-lg-8 col-md-auto mb-2 justify-content-center mb-md-0">
          <li className="nav-item">
-                <a className="nav-link active" aria-current="page"><Link to='/' className='text-decoration-none text-light'>Home</Link></a>
+                <a className="nav-link active" aria-current="page"><Link to='/categories' className='text-decoration-none text-light'>Home</Link></a>
               </li>
               {isAdmin ? (
                 <>
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/category/index' className='text-decoration-none text-light'>Categories</Link></a>
+                    <a className="nav-link"><Link to='/category' className='text-decoration-none text-light'>Categories</Link></a>
                   </li>
 
-                  <li className="nav-item">
-                    <a className="nav-link text-light">Add Category</a>
-                  </li>
+                  {/* <li className="nav-item"> */}
+                    {/* <a className="nav-link text-light"><Link to='/category' className='text-decoration-none text-light'>Add Category</Link></a> */}
+                  {/* </li> */}
 
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/courses/index' className='text-decoration-none text-light'>Courses</Link></a>
+                    <a className="nav-link"><Link to='/courses' className='text-decoration-none text-light'>Courses</Link></a>
                   </li>
 
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <a className="nav-link text-light">Add Course</a>
-                  </li>
+                  </li> */}
 
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/cart' className='text-decoration-none text-light'>Cart</Link></a>
+                    <a className="nav-link"><Link to='/cart/index' className='text-decoration-none text-light'>Cart</Link></a>
                   </li>
                 </>
               ):(
                 <>
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/category/index' className='text-decoration-none text-light'>Categories</Link></a>
+                    <a className="nav-link"><Link to='/category' className='text-decoration-none text-light'>Categories</Link></a>
                   </li>
 
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/courses/index' className='text-decoration-none text-light'>Courses</Link></a>
+                    <a className="nav-link"><Link to='/courses' className='text-decoration-none text-light'>Courses</Link></a>
                   </li>
 
                   <li className="nav-item">
@@ -180,47 +187,53 @@ export default function App() {
 
       </ul>
 
-      <div className="col-md-2 dropdown">
+      <div class="d-lg-flex col-lg-4 justify-content-lg-end z-3">
+      <div className="dropdown text-end">
           <a href="#" className="d-block text-decoration-none dropdown-toggle text-light" data-bs-toggle="dropdown" aria-expanded="false">
               {userData.username}
               <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle ms-2"/>
           </a>
-          <ul class="dropdown-menu text-small">
+          <ul class="dropdown-menu text-small z-3">
           <li><a className="dropdown-item"><Link to='/profile' className='text-decoration-none text-dark'>Profile</Link></a></li>
             <li><a className="dropdown-item"><Link to='/cart/index' className='text-decoration-none text-dark'>Cart</Link></a></li>
-            <li><a className="dropdown-item" href="#">My Orders</a></li>
+            <li><a className="dropdown-item"><Link to='/mycourses' className='text-decoration-none text-dark'>My Orders</Link></a></li>
             <li><hr className="dropdown-divider"/></li>
             <li><a className="dropdown-item" href="#"><Link to='/logout' onClick={onLogoutHandler}>Sign out</Link></a></li>
           </ul>
         </div>
+        </div>
+        </div>
         </>
 	):(
     <>
-      <ul className="nav col-8 col-md-auto mb-2 justify-content-center mb-md-0">
+    <div className="collapse d-lg-flex navbar-collapse" id="skillLab-nav">
+      <ul className="navbar-nav col-lg-9 col-md-auto mb-2 justify-content-center mb-md-0 gap-5">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page"><Link to="/" className='text-decoration-none text-light'>Home</Link></a>
+          <a className="nav-link active" aria-current="page"><Link to="/" className='text-decoration-none text-light me-4'>Home</Link></a>
         </li>
         <li className="nav-item">
-          <a className="nav-link">Categories</a>
-        </li>
-             
-        <li className="nav-item">
-          <a className="nav-link"><Link to='/signin' className='text-decoration-none text-light'>Sign In</Link></a>
+          <Link to="/categories" className="text-decoration-none text-light me-4"><a className="btn btn-light me-4">Our Courses</a></Link>
         </li>
 
-
         <li className="nav-item">
-          <a className="nav-link"><Link to='/signup'className='text-decoration-none text-light'>Sign Up</Link></a>
+        <a className="nav-link"><Link to='/signin' className="text-decoration-none text-light me-4">Login</Link></a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link"><Link to='/signup'className="text-decoration-none text-light">Sign Up</Link></a>
         </li>
       </ul>
+      
 
-      <div className="col-md-2 text-end">
-        <Link to='/signin'><button type="button" className="btn btn-outline-primary me-2">Login</button></Link>
-        <Link to='/signup'><button type="button" className="btn btn-primary">Sign Up</button></Link>
+    
+      {/* <div className="col-md-3 text-end d-flex g-2">
+      <a className="nav-link"><Link to='/signin' className="text-decoration-none text-light me-3">Login</Link></a>
+      <a className="nav-link"><Link to='/signup'className="text-decoration-none text-light">Sign Up</Link></a>
+      </div> */}
       </div>
         </>
-)}
-    </header>
+    )}
+    </div>
+    </nav>
 
     <div>
         <Routes>
@@ -234,13 +247,18 @@ export default function App() {
 
           {/* <Route path='/' element={isAuth ? <Home/> : <Signin login={loginHandler}/>}/> */}
           <Route path='/signup' element={<Signup register={registerHandler}/>}/>
-          <Route path='/signin' element={isAuth ? <Categories/> : <Signin login={loginHandler}/>}/>
+          <Route path='/signin' element={isAuth ? <Categories /> : <Signin login={loginHandler} />} />
+          <Route path='/categories' element={<Categories/> }/>
           <Route path='/transactions' element={TransactionsList}></Route>
 
           {/* Donot Change the folloing Paths */}
           <Route path="/courses/detail/:id" element={<CourseDetails />} />
           <Route path="/courses/coursesByCategory/:categoryId" element={<CoursesByCategory />} />
-          <Route path="/transactions/:cartId" element={<CoursesByCategory />} />
+          <Route path="/transactions/:cartId" element={<CartTotal />} />
+          <Route path="/place-order" element={<PlaceOrder />} />
+          <Route path='/mycourses' element={isAuth ? <MyCourses/> : <Signin login={loginHandler}/>}/>
+
+
         </Routes>
       </div>
 {/* 
@@ -254,6 +272,8 @@ export default function App() {
       {/* <CoursesByCategory></CoursesByCategory> */}
 
    {/* <FileUpload></FileUpload> */}
+      {/* <CartTotal /> */}
+      {/* <FileUpload /> */}
     </div>
   )
 }

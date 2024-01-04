@@ -20,7 +20,7 @@ export default function CategoryList() {
   }, []) // [] Are the list of dependencies needed
 
   const loadCategoryList = () => {
-    Axios.get("category/index")
+    Axios.get("/category/index")
       .then((response) => {
         console.log(response)
         setCategory(response.data.categories)
@@ -41,7 +41,7 @@ export default function CategoryList() {
     // return authheader;
   };
   const addCategory = (category) => {
-    Axios.post("category/add", category, setHeader())
+    Axios.post("/category/add", category, setHeader())
       .then(res => {
         console.log("Category Added Successfully !!!", res.data);
         loadCategoryList();
@@ -54,7 +54,7 @@ export default function CategoryList() {
 
 
   const editView = (id) => {
-    Axios.get(`category/edit?id=${id}`)
+    Axios.get(`/category/edit?id=${id}`)
     .then ((res) => {
         console.log(res.data.category);
         console.log("Loaded Category Information");
@@ -69,7 +69,7 @@ export default function CategoryList() {
   }
 
   const deleteCategory = (id) => {
-    Axios.delete(`category/delete?id=${id}`, setHeader())
+    Axios.delete(`/category/delete?id=${id}`, setHeader())
     .then(res => {
         console.log("Record deleted Successfullyyy !!");
         console.log(res);
@@ -81,7 +81,7 @@ export default function CategoryList() {
     })  
   }
   const updateCategory = (category) => {
-    Axios.put("category/update", category, setHeader())
+    Axios.put("/category/update", category, setHeader())
     .then(res => {
         console.log("Category Updated Successfullyyy !!");
         console.log(res);

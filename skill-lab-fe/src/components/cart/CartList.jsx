@@ -3,18 +3,27 @@ import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import CartItem from './CartItem'
 import { Link } from 'react-router-dom';
+
 export default function CartList() {
 
   const [cartItems, setCartItems] = useState([]);
-  const [finishedOrder, setFinishedOrder] = useState(false)
 
 
   useEffect(() => {
     loadCart();
-  }, []);
+  }, [cartItems]);
+
+  const setHeader = ()=> {
+    const authheader = {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    }
+    return authheader;
+  };
 
   const loadCart = () => {
-    Axios.get(`cart/index?id=65951de759c85b96d95cfd1f`) //${user_id}
+    Axios.get(`/cart/index`, setHeader()) //${user_id}
       .then((response) => {
         console.log("load cart",response);
         // set cartId
@@ -27,7 +36,7 @@ export default function CartList() {
 
   const removeItem = (course_id) => { //user_id
 
-    Axios.delete(`/cart/65951de759c85b96d95cfd1f/courses/${course_id}`)  //`/cart/${user_id}/courses/${course_id}`
+    Axios.delete(`/cart/courses/${course_id}`, setHeader())  //`/cart/${user_id}/courses/${course_id}`
       .then((response) => {
         console.log(response);
         loadCart();
@@ -36,20 +45,6 @@ export default function CartList() {
         console.log(err);
       });
   };
-
-  console.log(cartItems);
-
-
-const placeOrder = () => {
-  setFinishedOrder(true)
-  setCartItems([])
-
-  setTimeout(()=>{
-    setFinishedOrder(false)
-
-  }, 1500)
- 
-}
 
 
   return (
@@ -60,13 +55,12 @@ const placeOrder = () => {
       ) : (
         cartItems.map((course) => (
           
-          <CartItem key={course._id} course={course} onRemoveItem={removeItem} placingOrder={placeOrder}  />
+          <CartItem key={course._id} course={course} onRemoveItem={removeItem}  />
         ))        
       )}
-      {finishedOrder && (<p>You've been enrolled!!</p>)}
-   <div className='text-center'>
-      <Link to="/cart/transaction" className='btn btn-secondary'>Proceed To Payment</Link>
-    </div>
+<div className='text-center'>
+      <Link to='/transactions/:cartId'  className='btn btn-secondary'>Proceed to Transactions</Link>
+      </div>
     <br></br>
     </div>
   );

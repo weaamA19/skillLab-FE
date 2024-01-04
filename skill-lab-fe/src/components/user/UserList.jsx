@@ -20,7 +20,7 @@ export default function UserList() {
       }, []);
 
       const loadUsersList = () => {
-        Axios.get(`user/index`, authHeader)
+        Axios.get(`/user/index`, authHeader)
         .then((response) => {
             console.log(response);
             setUsers(response.data.user)
@@ -32,7 +32,7 @@ export default function UserList() {
 
       const editView = (id) => {
         console.log(id);
-        Axios.get(`user/edit?id=${id}`)
+        Axios.get(`/user/edit?id=${id}`)
         .then(res => {
           console.log("Loaded User Information");
           let user = res.data.editUser;
@@ -46,7 +46,7 @@ export default function UserList() {
       }
 
       const updateUser = (user) => {
-        Axios.put('user/update', user)
+        Axios.put('/user/update', user)
         .then((res) => {
           console.log("user Updated Successfully!");
           console.log(res);
@@ -60,7 +60,7 @@ export default function UserList() {
       }
 
       const deleteUser = (id) => {
-        Axios.delete(`user/delete?id=${id}`, authHeader)
+        Axios.delete(`/user/delete?id=${id}`, authHeader)
         .then((res) => {
           console.log("User Deleted Successfully");
           console.log(res);
