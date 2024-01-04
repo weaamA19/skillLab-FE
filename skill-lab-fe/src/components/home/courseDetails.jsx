@@ -63,21 +63,21 @@ export default function CourseDetails(props) {
       };
 
   return (
-    <>
-<div className="container">
-<div className="card mx-auto text-center col-md-7">
-  <div className="card-body ">
-      <h1>{courses.title}</h1>
-    </div>
+    <div>
+    <div className="container">
+      <div className="card mx-auto text-center col-md-7">
+          <div className="card-body ">
+            <h1>{courses.title}</h1>
+          </div>
 
-    <div className="card-body">
-      <h3>{courses.duration}</h3>
-      <h3>{courses.description}</h3>
-      <h3>{courses.price}</h3>
-      <button onClick={addCourseToCart} className="btn btn-secondary">Enroll Now</button>
-    </div>
-</div>
-</div>
+          <div className="card-body">
+            <h3>{courses.duration}</h3>
+            <h3>{courses.description}</h3>
+            <h3>{courses.price}</h3>
+            <button onClick={addCourseToCart} className="btn btn-secondary">Enroll Now</button>
+          </div>
+        </div>
+      </div>
     <ReactModal
       isOpen={isModalOpen}
       onRequestClose={() => setIsModalOpen(false)}
@@ -90,9 +90,7 @@ export default function CourseDetails(props) {
           <p>{modalMessage}</p>
           <button onClick={() => setIsModalOpen(false)}>Close </button>
         </div>
-
     </ReactModal>
-
-  </>
+  </div>
   )
 }
