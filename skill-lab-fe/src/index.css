@@ -11,7 +11,51 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+@media (min-width: 920px){
+  .nav-style {
+    height: 80px;
+  }
+}
 
-.nav-style {
-  height: 70px;
+.img-sizing {
+  width: 200px;
+  height: 25%;
+}
+
+.signin, .signup{
+  background-image: url('./learning.svg');
+  position: absolute;
+  top: 13%;
+  width: 100%;
+  /* opacity: 75%; */
+  /* background: rgba(0,0,0,0.5); */
+}
+
+.profile {
+  position: absolute;
+  top: 13%;
+  width: 100%;
+  /* padding-top: 40px; */
+}
+
+.signin-content, .signup-content{
+  margin-left: 40px;
+  width:35%;
+}
+
+.signup-content  {
+  height: 85%;
+}
+
+@media (max-width: 920px) {
+  .signin, .signup {
+    align-items: center;
+  }
+  .signin-content, .signup-content{
+    margin: auto;
+    width:80%;
+  }
+  .profile-section{
+    width: 100%;
+  }
 }

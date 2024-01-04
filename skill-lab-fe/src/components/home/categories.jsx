@@ -56,7 +56,7 @@ export default function Categories() {
           <div className="container">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
               {categories.map((category) => (
-                <div key={category._id} className="col">
+                <div key={category._id} className="col z-1">
                   <div className="card shadow-sm">
                     <svg
                       className="bd-placeholder-img card-img-top"
