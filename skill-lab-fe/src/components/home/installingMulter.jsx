@@ -14,12 +14,12 @@ export default function FileUpload() {
     formData.append('file', selectedFile);
 
     try {
-      const response = await axios.post('/upload', formData, {
+      const response = await axios.post('/category/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response.data);
+      console.log("response",response.data);
     } catch (error) {
       console.error('Error uploading file:', error);
     }

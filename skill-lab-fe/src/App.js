@@ -54,7 +54,11 @@ export default function App() {
   
 
   const registerHandler = (user) => {
-    Axios.post("/user/signup", user)
+    Axios.post("/user/signup", user, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+        }
+    })
     .then(res => {
       console.log(res);
     })
@@ -195,7 +199,7 @@ export default function App() {
       <div className="dropdown text-end">
           <a href="#" className="d-block text-decoration-none dropdown-toggle text-light" data-bs-toggle="dropdown" aria-expanded="false">
               {userData.username}
-              <img src={profile} alt="Profile image" width="32" height="32" class="rounded-circle ms-2"/>
+              <img src={"/uploads/"+userData.avatar} width="32" height="32" class="rounded-circle ms-2"/>
           </a>
           <ul class="dropdown-menu text-small z-3">
           <li><a className="dropdown-item"><Link to='/profile' className='text-decoration-none text-dark'>Profile</Link></a></li>

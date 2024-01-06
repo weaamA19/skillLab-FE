@@ -5,7 +5,7 @@ import profile from "../../profile.svg";
 
 export default function UserIndex({user, getUser}) {
   const [isEdit, setIsEdit] = useState(false);
-  const [userDetails, setUserDetails] = useState({user});
+  const [userDetails, setUserDetails] = useState(user); 
 
   let [getUserInfo,setUserInfo]=useState();
 
@@ -46,7 +46,11 @@ export default function UserIndex({user, getUser}) {
   }
 
   const updateUser = (user) => {
-    Axios.put('/user/update', user)
+    Axios.put('/user/update', user,{
+      headers: {
+        "Content-Type": "multipart/form-data"
+        }
+    })
     .then((res) => {
       console.log("User Updated Successfully!");
       console.log(res);
@@ -71,7 +75,7 @@ export default function UserIndex({user, getUser}) {
           <div>
             <h1 className="ms-4 mb-4">Profile</h1>
             <div className='d-flex flex-column justify-content-center align-items-center'>
-              <img src={profile} alt="Profile image" width="250" height="250" class="rounded-circle ms-2"/>
+              <img src={"/uploads/"+userDetails.avatar}  alt="Profile image" width="250" height="250" class="rounded-circle ms-2"/>
             </div>
           </div>
         </div>

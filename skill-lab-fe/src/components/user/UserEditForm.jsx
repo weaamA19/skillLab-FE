@@ -1,21 +1,31 @@
 import React, { useState } from 'react'
 
 export default function UserEditForm(props) {
-  const [currentUser, setCurrentUser] = useState(props.user);
+  const [currentUser, setCurrentUser] = useState({ ...props.user }); 
   // const [image, setImage] = useState("");
   console.log(props);
 
-  const handleChange = (e) => {
+
+  const handleChange = (event) => {
     const user = {...currentUser}
-    user[e.target.name] = e.target.value;
+    user[event.target.name] = event.target.value;
     console.log(user);
     setCurrentUser(user);
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    props.updateUser(currentUser);
-    e.target.reset();
+  const handleAvatarChange = (event) => {
+    setCurrentUser({ ...currentUser, avatar: event.target.files[0] });
+  }
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = new FormData();
+    data.append('user', JSON.stringify(currentUser))
+    data.append('avatar', currentUser.avatar);
+    props.updateUser(data);
+    event.target.reset();
   }
 
   return (
@@ -23,7 +33,7 @@ export default function UserEditForm(props) {
       <div>
         <h1>Edit Profile</h1>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType='multipart/form-data'>
         <div className="mb-2">
           <label>First Name</label>
           <input type='text' value={currentUser.firstName} className="form-control" name='firstName' onChange={handleChange}></input>
@@ -47,6 +57,11 @@ export default function UserEditForm(props) {
         <div className="mb-4">
           <label>Password</label>
           <input type='password' value={currentUser.password} className="form-control" name='password' onChange={handleChange}></input>
+        </div>
+
+        <div className='mb-4'>
+          <label>Profile Image</label>
+          <input type='file' className="form-control" onChange={handleAvatarChange} /> {/*value={currentUser.avatar} */}
         </div>
 
         <div className='d-flex justify-content-center mb-5'>

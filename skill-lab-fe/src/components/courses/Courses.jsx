@@ -4,7 +4,7 @@ export default function Courses(props) {
   console.log(props)
   return (
     <>
-        <td>{props.category_id.name}</td>
+        {/* <td>{props.category_id.name}</td> */}
        {/* {console.log(props.category_id.name)} */}
          <td>{props.title}</td>
          <td>{props.duration}</td>

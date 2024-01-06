@@ -100,11 +100,11 @@ Axios.delete(`/courses/delete?id=${id}`, setHeader())
 })
   }
 
-const allTheCourses = courses.map((courses , index) => (
+const allTheCourses = courses.map((course , index) => (
 
   <tr key={index}>  
  
-    <Courses {...courses}  editView = {editTheView} deleteTheCourse={deleteCourse}/>
+    <Courses {...course}  editView = {editTheView} deleteTheCourse={deleteCourse}/>
   </tr>
 
 ))
@@ -120,7 +120,7 @@ const allTheCourses = courses.map((courses , index) => (
          <table className="table table-stripes table mt-4 table border-top">
           <thead>
             <tr>
-              <th>Category</th>
+              {/* <th>Category</th> */}
               <th>Title</th>
               <th>Duration</th>
               <th>Description</th>

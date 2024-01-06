@@ -43,7 +43,11 @@ export default function CategoryList() {
     return authheader;
   };
   const addCategory = (category) => {
-    Axios.post("/category/add", category, setHeader())
+    Axios.post("/category/add", category,{
+        headers: {
+          "Content-Type": "multipart/form-data"
+          }
+      })
       .then(res => {
         console.log("Category Added Successfully !!!", res.data);
         loadCategoryList();
@@ -83,7 +87,11 @@ export default function CategoryList() {
     })  
   }
   const updateCategory = (category) => {
-    Axios.put("/category/update", category, setHeader())
+    Axios.put("/category/update", category, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+        }
+    })
     .then(res => {
         console.log("Category Updated Successfullyyy !!");
         console.log(res);
@@ -117,6 +125,7 @@ const allcategory = category.map((category) => (
           <tbody>
             <tr>
               <th>Category Name</th>
+              <th>Category Image</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>

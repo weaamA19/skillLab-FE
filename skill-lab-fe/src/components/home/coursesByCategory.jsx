@@ -8,6 +8,15 @@ export default function CoursesByCategory() {
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
     const { categoryId } = useParams();
+
+    const setHeader = ()=> {
+      const authheader = {
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+          }
+      }
+      return authheader;
+    };
   
     useEffect(() => {
       setSelectedCategory(categoryId);
@@ -26,7 +35,7 @@ export default function CoursesByCategory() {
     };
   
     const fetchCategories = () => {
-      Axios.get('/category/index')
+      Axios.get('/category/index', setHeader())
         .then((response) => {
           setCategories(response.data.categories);
         })
@@ -47,7 +56,7 @@ export default function CoursesByCategory() {
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
               {courses.map((course) => (
                 <div key={course._id} className="col">
-                  <div className="card shadow-sm">
+                  <div className="card shadow-sm ">
                     <svg
                       className="bd-placeholder-img card-img-top text-center"
                       width="100%"
