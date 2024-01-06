@@ -47,7 +47,7 @@ export default function CoursesByCategory() {
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
               {courses.map((course) => (
                 <div key={course._id} className="col">
-                  <div className="card shadow-sm">
+                  <div className="card shadow-sm ">
                     <svg
                       className="bd-placeholder-img card-img-top text-center"
                       width="100%"

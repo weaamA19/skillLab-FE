@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import CartItem from './CartItem'
@@ -11,22 +10,21 @@ export default function CartList() {
 
   useEffect(() => {
     loadCart();
-  }, [cartItems]);
+  }, []);
 
-  const setHeader = ()=> {
+  const setHeader = () => {
     const authheader = {
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("token")
-        }
+      }
     }
     return authheader;
   };
 
   const loadCart = () => {
-    Axios.get(`/cart/index`, setHeader()) //${user_id}
+    Axios.get(`/cart/index`, setHeader())
       .then((response) => {
-        console.log("load cart",response);
-        // set cartId
+        console.log("load cart", response);
         setCartItems(response.data.cart.courses);
       })
       .catch((err) => {
@@ -34,9 +32,8 @@ export default function CartList() {
       });
   };
 
-  const removeItem = (course_id) => { //user_id
-
-    Axios.delete(`/cart/courses/${course_id}`, setHeader())  //`/cart/${user_id}/courses/${course_id}`
+  const removeItem = (course_id) => {
+    Axios.delete(`/cart/courses/${course_id}`, setHeader())
       .then((response) => {
         console.log(response);
         loadCart();
@@ -48,20 +45,21 @@ export default function CartList() {
 
 
   return (
-    <div >
+    <div>
       <h1 className='text-center mt-4'>Cart</h1>
       {cartItems.length === 0 ? (
         <p className='text-center'>Your cart is empty!!</p>
       ) : (
         cartItems.map((course) => (
-          
-          <CartItem key={course._id} course={course} onRemoveItem={removeItem}  />
-        ))        
+          <CartItem key={course._id} course={course} onRemoveItem={removeItem} />
+        ))
       )}
-<div className='text-center'>
-      <Link to='/transactions/:cartId'  className='btn btn-secondary'>Proceed to Transactions</Link>
-      </div>
-    <br></br>
+      {cartItems.length > 0 && (
+        <div className='text-center'>
+          <Link to='/transactions/:cartId' className='btn btn-secondary'>Proceed to Transactions</Link>
+        </div>
+      )}
+      <br />
     </div>
   );
 }

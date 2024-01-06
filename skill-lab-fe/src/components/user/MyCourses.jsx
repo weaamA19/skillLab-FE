@@ -30,23 +30,33 @@ export default function MyCourses() {
   };
 
   return (
-    <div>
-      <h1>Enrolled Courses</h1>
-      <Row xs={1} md={3} className="g-4">
-        {enrolledCourses.map((course) => (
-          <Col key={course._id}>
-            <Card style={{ width: '18rem' }}>
-              <Card.Body>
-                <Card.Title>{course.title}</Card.Title>
-                <Card.Text>{course.description}</Card.Text>
-                <Link to={`/courses/detail/${course._id}`}>
-                  <Button variant="primary">View Course</Button>
-                </Link>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+    <div style={{ textAlign: 'center', paddingTop: '20px' }}>
+      <h1 style={{ marginBottom: '20px' }}>Enrolled Courses</h1>
+      {enrolledCourses.length === 0 ? (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#ffcccc', padding: '20px' }}>
+          <p>You are not enrolled in any course yet!</p>
+        </div>
+      ) : (
+        <Row className="justify-content-center">
+          {enrolledCourses.map((course) => (
+            <Col key={course._id} xs={12} sm={6} md={4} lg={3} className="mb-4">
+              <Card style={{ width: '18rem', height: '300px' }} className="h-100">
+                <Card.Body className="d-flex flex-column justify-content-between">
+                  <div>
+                    <Card.Title>{course.title}</Card.Title>
+                    <Card.Text>{course.description}</Card.Text>
+                  </div>
+                  <div className="text-center">
+                    <Link to={`/courses/detail/${course._id}`}>
+                      <Button variant="primary">View Course</Button>
+                    </Link>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
     </div>
   );
 }
