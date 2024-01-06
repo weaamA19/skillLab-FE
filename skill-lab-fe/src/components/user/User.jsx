@@ -6,7 +6,8 @@ export default function User(props) {
       <td></td>
       <td>{props.username}</td>
       <td>{props.firstName} {props.lastName}</td>
-      <td>{props.userType}</td>
+      <td>{props.emailAddress}</td>
+      <td>{props.userType === "1" ? "Admin" : "Student"}</td>
     </>
   )
 }

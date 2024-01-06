@@ -1,4 +1,4 @@
-import { Axios } from 'axios';
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import User from './User';
 import UserEditForm from './UserEditForm';
@@ -8,11 +8,14 @@ export default function UserList() {
     const [isEdit, setIsEdit] = useState(false)
     const [currentUser, setCurrentUser] = useState({})
 
-    const authHeader = {
+    const setHeader = ()=> {
+      const authheader = {
         headers: {
-             "Authorization": "Bearer " + localStorage.getItem("token")
-        }
-    }
+          "Authorization": "Bearer " + localStorage.getItem("token")
+          }
+      }
+      return authheader;
+    };
 
     useEffect(() => {
         //call api
@@ -20,10 +23,10 @@ export default function UserList() {
       }, []);
 
       const loadUsersList = () => {
-        Axios.get(`/user/index`, authHeader)
+        Axios.get('/user/index', setHeader())
         .then((response) => {
             console.log(response);
-            setUsers(response.data.user)
+            setUsers(response.data.users)
         })
         .catch((err) => {
             console.log(err);
@@ -60,7 +63,7 @@ export default function UserList() {
       }
 
       const deleteUser = (id) => {
-        Axios.delete(`/user/delete?id=${id}`, authHeader)
+        Axios.delete(`/user/delete?id=${id}`, setHeader())
         .then((res) => {
           console.log("User Deleted Successfully");
           console.log(res);
@@ -71,10 +74,10 @@ export default function UserList() {
           console.log(err);
         })
       }
-
-      const allUsers = users.map((user, index) => {
-        <tr key={index}>
-          <User {...user} editView={editView} deleteUser={deleteUser}/>
+      
+      const allUsers = users.map((users) => {
+        <tr key={users._id}>
+          <User {...users} editView={editView} deleteUser={deleteUser}/>
         </tr>
       })
   return (
@@ -82,7 +85,7 @@ export default function UserList() {
       <h1>User List</h1>
       <div>
         <table>
-          <tbody>
+          <thead>
             <tr>
               <th>User Image</th>              
               <th>Username</th>
@@ -90,6 +93,8 @@ export default function UserList() {
               <th>Email Address</th>
               <th>Role</th>
             </tr>
+            </thead>
+            <tbody>
             {allUsers}
           </tbody>
         </table>

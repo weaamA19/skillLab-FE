@@ -12,6 +12,7 @@ export default function CategoryList() {
   const [isEdit, setIsEdit] = useState(false);
   const [currentCategory, setCurrentCategory] = useState({});
 
+
   useEffect(() => {
     //Call API
 
@@ -19,8 +20,9 @@ export default function CategoryList() {
 
   }, []) // [] Are the list of dependencies needed
 
+
   const loadCategoryList = () => {
-    Axios.get("/category/index")
+    Axios.get("/category/index", setHeader())
       .then((response) => {
         console.log(response)
         setCategory(response.data.categories)
@@ -33,12 +35,12 @@ export default function CategoryList() {
 
 
   const setHeader = ()=> {
-    // const authheader = {
-    //   headers: {
-    //     "Authorization": "Bearer " + localStorage.getItem("token")
-    //     }
-    // }
-    // return authheader;
+    const authheader = {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    }
+    return authheader;
   };
   const addCategory = (category) => {
     Axios.post("/category/add", category, setHeader())
@@ -54,7 +56,7 @@ export default function CategoryList() {
 
 
   const editView = (id) => {
-    Axios.get(`/category/edit?id=${id}`)
+    Axios.get(`/category/edit?id=${id}`, setHeader())
     .then ((res) => {
         console.log(res.data.category);
         console.log("Loaded Category Information");

@@ -40,6 +40,7 @@ export default function CourseDetails(props) {
         Axios.get(`/courses/detail/${id}`)
         .then((response) => {
             console.log(response);
+            console.log("id",response.data.courses._id)
             setCourseId(response.data.courses._id);
             setCourses(response.data.courses);
           })
@@ -49,6 +50,7 @@ export default function CourseDetails(props) {
       };
 
       const addCourseToCart = () => {
+       
         Axios.put(`/cart/update`, { courses: courseId }, setHeader())
         .then((response) => {
           console.log(response);

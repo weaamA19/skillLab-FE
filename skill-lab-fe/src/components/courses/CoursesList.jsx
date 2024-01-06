@@ -13,13 +13,22 @@ export default function CoursesList(props) {
   const [isEdit, setIsEdit] = useState(false)
   const [currentCourses, setCurrentCourses] = useState({})
 
+  const setHeader = ()=> {
+    const authheader = {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    }
+    return authheader;
+  };
+
   useEffect(() => {
     //call api
     loadCoursesList();
   }, []);
 
   const loadCoursesList = () => {
-    Axios.get("/courses/index")
+    Axios.get("/courses/index", setHeader())
     .then((response) => {
       console.log(response);
       setCourses(response.data.courses);
@@ -30,7 +39,7 @@ export default function CoursesList(props) {
   }
 
   const addCourses = (courses) => {
-    Axios.post("/courses/add", courses)
+    Axios.post("/courses/add", courses, setHeader())
     .then(res =>{
     console.log('Course has been Added') 
     loadCoursesList()
@@ -44,7 +53,7 @@ export default function CoursesList(props) {
   }
 
   const editTheView = (id) => {
-   Axios.get(`/courses/edit?id=${id}`)
+   Axios.get(`/courses/edit?id=${id}`, setHeader())
    .then((res) => {
   console.log(res.data.courses) 
   console.log('Loaded the Information') 
@@ -61,7 +70,7 @@ setCurrentCourses(courses)
 
 
   const updateTheview = (courses) => {
-Axios.put("/courses/update", courses )
+Axios.put("/courses/update", courses, setHeader() )
 
 .then(res => {
   console.log('Course has been Updated')
@@ -78,7 +87,7 @@ Axios.put("/courses/update", courses )
 
 
   const deleteCourse = (id) => {
-Axios.delete(`/courses/delete?id=${id}`)
+Axios.delete(`/courses/delete?id=${id}`, setHeader())
 .then(res => {
   console.log('Course has been Deleted')
   console.log(res)
