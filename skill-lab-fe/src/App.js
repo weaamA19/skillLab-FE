@@ -205,12 +205,12 @@ export default function App() {
               {userData.username}
               {/* <img src={"/uploads/"+userData.avatar} width="32" height="32" class="rounded-circle ms-2"/> */}
           </a>
-          <ul class="dropdown-menu text-small z-3">
-          <li><a className="dropdown-item"><Link to='/profile' className='text-decoration-none text-dark'>Profile</Link></a></li>
-            <li><a className="dropdown-item"><Link to='/cart/index' className='text-decoration-none text-dark'>Cart</Link></a></li>
-            <li><a className="dropdown-item"><Link to='/mycourses' className='text-decoration-none text-dark'>My Orders</Link></a></li>
+          <ul class="dropdown-menu text-small z-4">
+            <li><Link to='/profile' className='dropdown-item text-decoration-none text-dark'>Profile</Link></li>
+            <li><Link to='/cart/index' className='dropdown-item text-decoration-none text-dark'>Cart</Link></li>
+            <li><Link to='/mycourses' className='dropdown-item text-decoration-none text-dark'>My Orders</Link></li>
             <li><hr className="dropdown-divider"/></li>
-            <li><a className="dropdown-item" href="#"><Link to='/logout' onClick={onLogoutHandler}>Sign out</Link></a></li>
+            <li><Link to='/logout'className="dropdown-item" onClick={onLogoutHandler}>Sign out</Link></li>
           </ul>
         </div>
         </div>
