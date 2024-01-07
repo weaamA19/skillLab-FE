@@ -72,14 +72,7 @@ export default function CourseDetails(props) {
 
   return (
     <div className="container">
-      
-    {isLoading ? (
-      // Loading indicator
-      <div className="loading-container">
-        <div className="loading"></div>
-      </div>
-    ) : (
-      // Course details or enrollment button
+      {/* Course details or enrollment button */}
       <div className="card mx-auto col-md-7">
         <div className="card-body ">
           <h1>{course.title}</h1>
@@ -99,7 +92,7 @@ export default function CourseDetails(props) {
           )}
         </div>
       </div>
-    )}
+
       <ReactModal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
