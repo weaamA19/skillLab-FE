@@ -18,8 +18,16 @@ export default function TransactionsList(props) {
     loadTransactionsList();
   }, []);
 
+  const setHeader = ()=> {
+    const authheader = {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    }
+    return authheader;
+  };
   const loadTransactionsList = () => {
-    Axios.get("/transactions/index")
+    Axios.get("/transactions/index", setHeader())
     .then((response) => {
       console.log(response);
       setTransactions(response.data.transactions);
@@ -30,7 +38,7 @@ export default function TransactionsList(props) {
   }
 
   const addTransactions = (transactions) => {
-    Axios.post("/transactions/add", transactions)
+    Axios.post("/transactions/add", transactions, setHeader())
     .then(res =>{
     console.log('Transaction has been Added') 
     loadTransactionsList()
@@ -45,7 +53,7 @@ export default function TransactionsList(props) {
   }
 
   const editTheView = (id) => {
-   Axios.get(`/transactions/edit?id=${id}`)
+   Axios.get(`/transactions/edit?id=${id}`, setHeader())
    .then((res) => {
 
   console.log(res.data.transactions) 
@@ -65,7 +73,7 @@ setCurrentTransactions(transactions) }
 
 
   const updateTheview = (transaction) => {
-Axios.put("/transactions/update", transaction)
+Axios.put("/transactions/update", transaction, setHeader())
 .then(res => {
   console.log('Transaction has been Updated')
   console.log(res)
@@ -81,7 +89,7 @@ Axios.put("/transactions/update", transaction)
 
 
   const deleteTransactions = (id) => {
-Axios.delete(`/transactions/delete?id=${id}`)
+Axios.delete(`/transactions/delete?id=${id}`, setHeader())
 .then(res => {
   console.log('Transaction has been Deleted')
   console.log(res)

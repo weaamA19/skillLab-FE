@@ -19,7 +19,14 @@ export default function CategoryList() {
     loadCategoryList();
 
   }, []) // [] Are the list of dependencies needed
-
+  const setHeader = ()=> {
+    const authheader = {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    }
+    return authheader;
+  };
 
   const loadCategoryList = () => {
     Axios.get("/category/index", setHeader())
@@ -33,19 +40,12 @@ export default function CategoryList() {
       })
   }
 
-
-  const setHeader = ()=> {
-    const authheader = {
-      headers: {
-        "Authorization": "Bearer " + localStorage.getItem("token")
-        }
-    }
-    return authheader;
-  };
   const addCategory = (category) => {
-    Axios.post("/category/add", category,{
+    Axios.post("/category/add", category, {
         headers: {
-          "Content-Type": "multipart/form-data"
+        "Content-Type": "multipart/form-data",
+        "Authorization": "Bearer " + localStorage.getItem("token")
+          
           }
       })
       .then(res => {
@@ -89,7 +89,9 @@ export default function CategoryList() {
   const updateCategory = (category) => {
     Axios.put("/category/update", category, {
       headers: {
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "multipart/form-data",
+        "Authorization": "Bearer " + localStorage.getItem("token")
+
         }
     })
     .then(res => {
