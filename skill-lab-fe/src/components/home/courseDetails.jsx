@@ -72,27 +72,49 @@ export default function CourseDetails(props) {
 
   return (
     <div className="container">
-      {/* Course details or enrollment button */}
-      <div className="card mx-auto col-md-7">
-        <div className="card-body ">
-          <h1>{course.title}</h1>
-        </div>
-        <div className="card-body">
-          <p>Duration: {course.duration}</p>
-          <p>Description: {course.description}</p>
-          <p>Price: ${course.price}</p>
-
-          {/* Conditional rendering based on enrollment status */}
-          {isEnrolled ? (
-            <p style={{ color: 'blue' }}>You are already enrolled in this course !!</p>
-          ) : (
+      {/* Conditional rendering based on enrolledCourses */}
+      {enrolledCourses.length === 0 ? (
+        <div className="card mx-auto col-md-7">
+          <div className="card-body ">
+            <h1>{course.title}</h1>
+          </div>
+          <div className="card-body">
+            <p>Duration: {course.duration}</p>
+            <p>Description: {course.description}</p>
+            <p>Price: ${course.price}</p>
             <div className='d-flex gap-2 align-items-center justify-content-center'>
               <button onClick={addCourseToCart} className="btn btn-secondary">Enroll Now</button>
             </div>
-          )}
+          </div>
         </div>
-      </div>
-
+      ) : (
+        isLoading ? (
+          // Loading indicator
+          <div className="loading-container">
+            <div className="loading"></div>
+          </div>
+        ) : (
+          // Course details or enrollment button
+          <div className="card mx-auto col-md-7">
+            <div className="card-body ">
+              <h1>{course.title}</h1>
+            </div>
+            <div className="card-body">
+              <p>Duration: {course.duration}</p>
+              <p>Description: {course.description}</p>
+              <p>Price: ${course.price}</p>
+              {/* Conditional rendering based on enrollment status */}
+              {isEnrolled ? (
+                <p style={{ color: 'blue' }}>You are already enrolled in this course !!</p>
+              ) : (
+                <div className='d-flex gap-2 align-items-center justify-content-center'>
+                  <button onClick={addCourseToCart} className="btn btn-secondary">Enroll Now</button>
+                </div>
+              )}
+            </div>
+          </div>
+        )
+      )}
       <ReactModal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}

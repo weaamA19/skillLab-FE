@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 
 export default function MyCourses() {
-  const [enrolledCourses, setEnrolledCourses] = useState([]);
+  const [enrolledCourses, setEnrolledCourses] = useState(null); // Initialize as null
 
   useEffect(() => {
     fetchEnrolledCourses();
@@ -32,7 +32,9 @@ export default function MyCourses() {
   return (
     <div style={{ textAlign: 'center', paddingTop: '20px' }}>
       <h1 style={{ marginBottom: '20px' }}>Enrolled Courses</h1>
-      {enrolledCourses.length === 0 ? (
+      {enrolledCourses === null ? ( // Condition to check if data hasn't been fetched yet
+        <p>Loading...</p>
+      ) : enrolledCourses.length === 0 ? (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#ffcccc', padding: '20px' }}>
           <p>You are not enrolled in any course yet!</p>
         </div>

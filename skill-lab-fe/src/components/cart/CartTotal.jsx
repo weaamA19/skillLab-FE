@@ -6,14 +6,11 @@ export default function CartTotal() {
   const [courses, setCourses] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [cardID, setCardID] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    loadCourses();
+    loadData();
   }, []);
-
-  useEffect(() => {
-    fetchTotalAmount();
-  }, [cardID]);
 
   const setHeader = () => {
     return {
@@ -23,47 +20,52 @@ export default function CartTotal() {
     };
   };
 
-  const loadCourses = () => {
-    Axios.get('/cart/index', setHeader())
-      .then((response) => {
-        setCardID(response.data.cart._id);
-        setCourses(response.data.cart.courses);
-      })
-      .catch((error) => {
-        console.error('Error fetching courses:', error);
-      });
-  }
+  const loadData = async () => {
+    try {
+      const cartResponse = await Axios.get('/cart/index', setHeader());
+      const cardId = cartResponse.data.cart._id;
+      const coursesData = cartResponse.data.cart.courses;
 
-  const fetchTotalAmount = () => {
-    if (cardID !== "") {
-      Axios.get(`/transactions/${cardID}`, setHeader())
-        .then((response) => {
-          setTotalAmount(response.data.updatedTransaction.amount); // Assuming the amount is returned as totalPrice
-        })
-        .catch((error) => {
-          console.error('Error fetching total amount:', error);
-        });
+      setCardID(cardId);
+      setCourses(coursesData);
+
+      const totalAmountResponse = await Axios.get(`/transactions/${cardId}`, setHeader());
+      const updatedTotalAmount = totalAmountResponse.data.updatedTransaction.amount;
+
+      setTotalAmount(updatedTotalAmount);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="card">
       <div className="card-body">
         <h1 className="card-title">Transaction</h1>
-        {courses.length === 0 ? (
-          <p>Your cart is empty!!</p>
+        {isLoading ? (
+          <p>Calculating the total amount...</p>
         ) : (
-          <ul className="list-group list-group-flush">
-            {courses.map((course) => (
-              <li key={course.id} className="list-group-item">
-                {course.title} - ${course.price}
-              </li>
-            ))}
-          </ul>
+          <>
+            {courses.length === 0 ? (
+              <p>Your cart is empty!!</p>
+            ) : (
+              <ul className="list-group list-group-flush">
+                {courses.map((course) => (
+                  <li key={course.id} className="list-group-item">
+                    {course.title} - ${course.price}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <h4 className="mt-3">Total Amount: ${totalAmount}</h4>
+            <Link to="/place-order" className="btn btn-primary mt-3">
+              Proceed to CheckOut
+            </Link>
+          </>
         )}
-        <h4 className="mt-3">Total Amount: ${totalAmount}</h4>
-        <Link to="/place-order" className="btn btn-primary mt-3">Proceed to CheckOut</Link>
       </div>
     </div>
   );
-};
+}
