@@ -120,7 +120,7 @@ const allTheCourses = courses.map((course , index) => (
          <table className="table table-stripes table mt-4 table border-top">
           <thead>
             <tr>
-              {/* <th>Category</th> */}
+              <th>Category</th>
               <th>Title</th>
               <th>Duration</th>
               <th>Description</th>
