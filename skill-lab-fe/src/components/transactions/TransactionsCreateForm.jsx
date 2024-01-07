@@ -23,28 +23,33 @@ export default function TransactionsCreateForm(props) {
     
 
   return (
-    <div>
-   <h2 className='text-center'>Create Transaction</h2>
-
-<form onSubmit={handleSubmit} >
-
-<div className='row d-flex justify-content-center align-items-center'>
-  <div  className='col-md-6'>
-<label>Amount</label>
-<input type='Number' name='amount' onChange={handleChange} className='form-control'></input>
-  </div>
-</div>
-
-<br></br>
-
-<div className='row d-flex justify-content-center align-items-center text-center'>
-    <div  className='col-md-6'>
-        <input type='submit' value="Add Transaction" className='btn btn-secondary'></input>
+<div>
+  <h2 className='text-center'>Create Transaction</h2>
+  
+  <form onSubmit={handleSubmit}>
+    <div className='row d-flex justify-content-center align-items-center'>
+      <div className='col-md-6'>
+        <label>Cart Id</label>
+        <input type='string' name='cart_id' onChange={handleChange} className='form-control' />
+      </div>
     </div>
-   </div>
-    </form>
-    <br></br>
+
+    <div className='row d-flex justify-content-center align-items-center'>
+      <div className='col-md-6'>
+        <label>Amount</label>
+        <input type='Number' name='amount' onChange={handleChange} className='form-control' />
+      </div>
+    </div>
+
+    <div className='row d-flex justify-content-center align-items-center text-center'>
+      <div className='col-md-6'>
+        <input type='submit' value="Add Transaction" className='btn btn-secondary' />
+      </div>
+    </div>
+  </form>
+  <br />
 </div>
+
 
   )
 }

@@ -36,27 +36,31 @@ export default function CategoryEditForm(props) {
     }
 
     return (
-        <div>
-            <h2 className='text-center'>Edit Category</h2>
-            <form onSubmit={handleSubmit} encType='multipart/form-data'>
-                <div className='row d-flex justify-content-center align-items-center'>
-                    <div className='col-md-6'>
-                        <label>Name</label>
-                        <input type='text' value={category.name} className="form-control" onChange={handleNameChange} />
-                    </div>
-                    <div className='col-md-6'>
-                        <label>Avatar</label>
-                        <input type='file' className="form-control" onChange={handleAvatarChange} />
-                    </div>
-                </div>
-                <br />
-                <div className='row d-flex justify-content-center align-items-center text-center'>
-                    <div className='col-md-6'>
-                        <input type='submit' className="btn btn-secondary" value="Update Category" />
-                    </div>
-                </div>
-                <br />
-            </form>
-        </div>
+<div>
+  <h2 className='text-center'>Edit Category</h2>
+  <form onSubmit={handleSubmit} encType='multipart/form-data'>
+    <div className='row d-flex justify-content-center align-items-center'>
+      <div className='col-md-6'>
+        <label>Name</label>
+        <input type='text' value={category.name} className="form-control" onChange={handleNameChange} />
+      </div>
+    </div>
+
+    <div className='row d-flex justify-content-center align-items-center'>
+      <div className='col-md-6'>
+        <label>Avatar</label>
+        <input type='file' className="form-control" onChange={handleAvatarChange} />
+      </div>
+    </div>
+
+    <div className='row d-flex justify-content-center align-items-center text-center'>
+      <div className='col-md-6'>
+        <input type='submit' className="btn btn-secondary" value="Update Category" />
+      </div>
+    </div>
+  </form>
+  <br />
+</div>
+
     );
 }

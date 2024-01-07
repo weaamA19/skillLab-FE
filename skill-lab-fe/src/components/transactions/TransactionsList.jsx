@@ -121,7 +121,8 @@ const allTheTransactions = transactions.map((transactions , index) => (
          <table className="table table-stripes table mt-4 table border-top bottom border">
           <tbody>
             <tr>
-            <th>Amount</th> 
+            <th>Cart Id</th> 
+             <th>Amount</th> 
              <th>Edit</th>
              <th>Delete</th>
             </tr>            
@@ -130,11 +131,9 @@ const allTheTransactions = transactions.map((transactions , index) => (
         </table>
     </div>
 </div>
-    {(!isEdit) ? 
-      <TransactionsCreateForm addTransactions={addTransactions}></TransactionsCreateForm>
-      :
-      <TransactionsEditForm key={currentTransactions._id} transactions={currentTransactions} updateTheview={updateTheview}></TransactionsEditForm>
-}
+
+    {(isEdit) && <TransactionsEditForm key={currentTransactions._id} transactions={currentTransactions} updateTheview={updateTheview}></TransactionsEditForm>}
+
     </div>
   )
 }

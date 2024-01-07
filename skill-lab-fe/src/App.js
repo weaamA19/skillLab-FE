@@ -159,6 +159,10 @@ export default function App() {
                     <a className="nav-link"><Link to='/courses' className='text-decoration-none text-light'>Courses</Link></a>
                   </li>
 
+                  <li className="nav-item">
+                    <a className="nav-link"><Link to='/transactions/index' className='text-decoration-none text-light'>Transactions</Link></a>
+                  </li>
+
                   {/* <li className="nav-item">
                     <a className="nav-link text-light">Add Course</a>
                   </li> */}
@@ -248,7 +252,8 @@ export default function App() {
         <Route path='/' element={<Home/> }/>
           <Route path='/category' element={isAuth ? <CategoryList user = {userData}/> : <Signin login={loginHandler}/>}/>
           <Route path='/courses' element={isAuth ? <CoursesList user = {userData}/> : <Signin login={loginHandler}/>}/>
-          <Route path='/cart/index' element={isAuth ? <CartList user = {userData}/> : <Signin login={loginHandler}/>}/>
+          <Route path='/cart/index' element={isAuth ? <CartList user={userData} /> : <Signin login={loginHandler} />} />
+          <Route path='/transactions/index' element={isAuth ? <TransactionsList user = {userData}/> : <Signin login={loginHandler}/>}/>
           <Route path='/profile' element={userData ?<UserIndex getUser={getUser} user={userData}/>:""}/>
           <Route path='/editProfile' element={<UserEditForm getUser={getUser} user={userData}/>}/>
           {/* <Route path='/signin' element={isAuth ? <CoursesList/> : <Signin login={loginHandler}/>}/> */}

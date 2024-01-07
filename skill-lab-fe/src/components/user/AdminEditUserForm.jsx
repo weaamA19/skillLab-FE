@@ -30,22 +30,22 @@ export default function AdminEditUserForm(props) {
       <form onSubmit={handleSubmit}>
         <div className="mb-2">
           <label>First Name</label>
-          <input type='text' value={currentUser.firstName} className="form-control" name='firstName' onChange={handleChange}></input>
+          <input type='text' value={currentUser.firstName} className="form-control" name='firstName' onChange={handleChange} readOnly></input>
         </div>
 
         <div className="mb-2">
           <label>Last Name</label>
-          <input type='text' value={currentUser.lastName} className="form-control" name='lastName' onChange={handleChange}></input>
+          <input type='text' value={currentUser.lastName} className="form-control" name='lastName' onChange={handleChange}readOnly></input>
         </div>
 
         <div className="mb-2">
           <label>Username</label>
-          <input type='text' value={currentUser.username} className="form-control" name='username' onChange={handleChange}></input>
+          <input type='text' value={currentUser.username} className="form-control" name='username' onChange={handleChange} readOnly></input>
         </div>
 
         <div className="mb-2">
           <label>Email Address</label>
-          <input type='email' value={currentUser.emailAddress} className="form-control" name='emailAddress' onChange={handleChange}></input>
+          <input type='email' value={currentUser.emailAddress} className="form-control" name='emailAddress' onChange={handleChange} readOnly></input>
         </div>
 
         <div className="mb-2">

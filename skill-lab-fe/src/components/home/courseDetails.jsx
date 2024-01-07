@@ -72,6 +72,7 @@ export default function CourseDetails(props) {
 
   return (
     <div className="container">
+      
     {isLoading ? (
       // Loading indicator
       <div className="loading-container">

@@ -28,6 +28,12 @@ export default function TransactionsCreateForm(props) {
    <h2 className='text-center'>Edit Transaction</h2>
 
 <form onSubmit={handleSubmit} >
+<div className='row d-flex justify-content-center align-items-center'>
+      <div className='col-md-6'>
+        <label>Cart Id</label>
+        <input type='string' name='cart_id' value={editTransaction.cart_id} onChange={handleChange} className='form-control' readOnly/>
+      </div>
+    </div>
 
    <div className='row d-flex justify-content-center align-items-center'>
 <div className='col-md-6'>

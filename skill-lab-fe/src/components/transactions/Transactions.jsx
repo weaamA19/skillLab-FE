@@ -4,6 +4,7 @@ export default function Courses(props) {
   return (
     <>
       {props.cartVisible && <td>{props.cart}</td>}
+      <td>{props.cart_id}</td>
       <td>{props.amount}</td>
       <td>
         <button
