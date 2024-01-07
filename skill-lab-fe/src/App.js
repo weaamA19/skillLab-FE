@@ -168,7 +168,7 @@ export default function App() {
                   </li>
 
                   <li className="nav-item">
-                    <a className="nav-link"><Link to='/user' className='text-decoration-none text-light'>USer</Link></a>
+                    <a className="nav-link"><Link to='/user' className='text-decoration-none text-light'>User</Link></a>
                   </li>
                 </>
               ):(

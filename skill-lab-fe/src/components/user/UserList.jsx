@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import User from './User';
 import UserEditForm from './UserEditForm';
+import AdminEditUserForm from './AdminEditUserForm';
 
 export default function UserList() {
     const [users, setUsers] = useState([])
@@ -35,10 +36,10 @@ export default function UserList() {
 
       const editView = (id) => {
         console.log(id);
-        Axios.get(`/user/edit?id=${id}`)
+        Axios.get(`/user/edit?id=${id}`, setHeader())
         .then(res => {
           console.log("Loaded User Information");
-          let user = res.data.editUser;
+          let user = res.data.user;
           setIsEdit(!isEdit);
           setCurrentUser(user)
         })
@@ -49,7 +50,11 @@ export default function UserList() {
       }
 
       const updateUser = (user) => {
-        Axios.put('/user/update', user)
+        Axios.put('/user/update', user, {
+          headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        })
         .then((res) => {
           console.log("user Updated Successfully!");
           console.log(res);
@@ -75,16 +80,18 @@ export default function UserList() {
         })
       }
       
-      const allUsers = users.map((users) => {
-        <tr key={users._id}>
-          <User {...users} editView={editView} deleteUser={deleteUser}/>
+      const allUsers = users.map((user, index) => (
+        <tr key={index}>
+          <User {...user} editView={editView} deleteUser={deleteUser}/>
         </tr>
-      })
+      ))
   return (
     <div>
-      <h1>User List</h1>
-      <div>
-        <table>
+      <div className='d-flex justify-content-center mb-2'>
+        <h1 className='w-75'>User List</h1>
+      </div>
+      <div className='d-flex justify-content-center'>
+        <table class="table w-75">
           <thead>
             <tr>
               <th>User Image</th>              
@@ -92,6 +99,8 @@ export default function UserList() {
               <th>Name</th>
               <th>Email Address</th>
               <th>Role</th>
+              <th></th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
@@ -100,7 +109,7 @@ export default function UserList() {
         </table>
       </div>
 
-        {(isEdit) && <UserEditForm key={currentUser._id} user={currentUser} updateUser={updateUser}/>}
+      {(isEdit) && <AdminEditUserForm key={currentUser._id} user={currentUser} updateUser={updateUser}/>}
 
     </div>
   )
