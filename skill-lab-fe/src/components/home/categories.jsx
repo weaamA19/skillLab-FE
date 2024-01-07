@@ -12,8 +12,18 @@ export default function Categories() {
     loadCategories();
   }, []);
 
+  const setHeader = ()=> {
+    const authheader = {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    }
+    return authheader;
+  };
+
+
   const loadCategories = () => {
-    Axios.get('/category/index')
+    Axios.get('/category/index', setHeader())
       .then((response) => {
         console.log(response);
         setCategories(response.data.categories);

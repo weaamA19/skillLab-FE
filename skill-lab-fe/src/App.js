@@ -27,6 +27,7 @@ import profile from './profile.svg';
 import CartTotal from './components/cart/CartTotal';
 import PlaceOrder from './components/cart/PlaceOrder';
 import MyCourses from './components/user/MyCourses';
+import UserList from './components/user/UserList';
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -165,6 +166,10 @@ export default function App() {
                   <li className="nav-item">
                     <a className="nav-link"><Link to='/cart/index' className='text-decoration-none text-light'>Cart</Link></a>
                   </li>
+
+                  <li className="nav-item">
+                    <a className="nav-link"><Link to='/user' className='text-decoration-none text-light'>User</Link></a>
+                  </li>
                 </>
               ):(
                 <>
@@ -260,6 +265,8 @@ export default function App() {
           <Route path="/transactions/:cartId" element={<CartTotal />} />
           <Route path="/place-order" element={<PlaceOrder />} />
           <Route path='/mycourses' element={isAuth ? <MyCourses/> : <Signin login={loginHandler}/>}/>
+
+          <Route path='/user' element={isAuth ? <UserList/> : ''}/>
 
 
         </Routes>

@@ -1,18 +1,22 @@
-import { Axios } from 'axios';
+import Axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import User from './User';
 import UserEditForm from './UserEditForm';
+import AdminEditUserForm from './AdminEditUserForm';
 
 export default function UserList() {
     const [users, setUsers] = useState([])
     const [isEdit, setIsEdit] = useState(false)
     const [currentUser, setCurrentUser] = useState({})
 
-    const authHeader = {
+    const setHeader = ()=> {
+      const authheader = {
         headers: {
-             "Authorization": "Bearer " + localStorage.getItem("token")
-        }
-    }
+          "Authorization": "Bearer " + localStorage.getItem("token")
+          }
+      }
+      return authheader;
+    };
 
     useEffect(() => {
         //call api
@@ -20,10 +24,10 @@ export default function UserList() {
       }, []);
 
       const loadUsersList = () => {
-        Axios.get(`/user/index`, authHeader)
+        Axios.get('/user/index', setHeader())
         .then((response) => {
             console.log(response);
-            setUsers(response.data.user)
+            setUsers(response.data.users)
         })
         .catch((err) => {
             console.log(err);
@@ -32,10 +36,10 @@ export default function UserList() {
 
       const editView = (id) => {
         console.log(id);
-        Axios.get(`/user/edit?id=${id}`)
+        Axios.get(`/user/edit?id=${id}`, setHeader())
         .then(res => {
           console.log("Loaded User Information");
-          let user = res.data.editUser;
+          let user = res.data.user;
           setIsEdit(!isEdit);
           setCurrentUser(user)
         })
@@ -46,7 +50,11 @@ export default function UserList() {
       }
 
       const updateUser = (user) => {
-        Axios.put('/user/update', user)
+        Axios.put('/user/update', user, {
+          headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        })
         .then((res) => {
           console.log("user Updated Successfully!");
           console.log(res);
@@ -60,7 +68,7 @@ export default function UserList() {
       }
 
       const deleteUser = (id) => {
-        Axios.delete(`/user/delete?id=${id}`, authHeader)
+        Axios.delete(`/user/delete?id=${id}`, setHeader())
         .then((res) => {
           console.log("User Deleted Successfully");
           console.log(res);
@@ -71,31 +79,37 @@ export default function UserList() {
           console.log(err);
         })
       }
-
-      const allUsers = users.map((user, index) => {
+      
+      const allUsers = users.map((user, index) => (
         <tr key={index}>
           <User {...user} editView={editView} deleteUser={deleteUser}/>
         </tr>
-      })
+      ))
   return (
     <div>
-      <h1>User List</h1>
-      <div>
-        <table>
-          <tbody>
+      <div className='d-flex justify-content-center mb-2'>
+        <h1 className='w-75'>User List</h1>
+      </div>
+      <div className='d-flex justify-content-center'>
+        <table class="table w-75">
+          <thead>
             <tr>
               <th>User Image</th>              
               <th>Username</th>
               <th>Name</th>
               <th>Email Address</th>
               <th>Role</th>
+              <th></th>
+              <th></th>
             </tr>
+            </thead>
+            <tbody>
             {allUsers}
           </tbody>
         </table>
       </div>
 
-        {(isEdit) && <UserEditForm key={currentUser._id} user={currentUser} updateUser={updateUser}/>}
+      {(isEdit) && <AdminEditUserForm key={currentUser._id} user={currentUser} updateUser={updateUser}/>}
 
     </div>
   )
